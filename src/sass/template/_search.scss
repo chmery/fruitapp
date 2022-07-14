@@ -32,7 +32,7 @@
         width: 100%;
         height: 60px;
         border-radius: 10em;
-        padding: 0em 7em 0em 1.5em;
+        padding: 0em 7em 0em 1.8em;
 
         &:focus {
             outline: none;
@@ -41,14 +41,14 @@
 
     &__show-all {
         z-index: 5;
-        width: 80px;
+        margin-right: 1.8em;
         text-align: center;
         position: absolute;
         cursor: pointer;
-        transition: font-size 0.1s;
+        transition: transform 0.1s;
 
         &:hover {
-            font-size: 1.1875rem;
+            transform: scale(1.1);
         }
     }
 }
