@@ -1,0 +1,23 @@
+{
+    "name": "fruitapp",
+    "version": "1.0.0",
+    "description": "Search for fruits and calculate calories.",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html --public-url . --no-source-maps"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chmery/fruitapp.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/chmery/fruitapp/issues"
+    },
+    "homepage": "https://github.com/chmery/fruitapp#readme",
+    "devDependencies": {
+        "@parcel/transformer-sass": "^2.6.2",
+        "parcel": "^2.6.2"
+    }
+}
