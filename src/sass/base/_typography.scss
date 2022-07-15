@@ -27,6 +27,11 @@ p {
     color: var(--dark-text);
 }
 
+p.bright {
+    color: var(--bright-text);
+    font-size: 1rem;
+}
+
 input {
     color: var(--dark-text);
     font-size: 1.125rem;

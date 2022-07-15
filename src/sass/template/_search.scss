@@ -44,4 +44,57 @@
             transform: scale(1.1);
         }
     }
+
+    &__results {
+        box-sizing: border-box;
+        width: 100%;
+        background: #fff;
+        padding: 1em;
+        border-radius: 1em;
+        margin-top: 1em;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+    }
+
+    &__result {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background: var(--bright-container);
+        border-radius: 1em;
+        padding: 0.7em 1em;
+        transition: background 0.1s;
+
+        &:hover {
+            background: var(--dark-container);
+        }
+
+        &-image {
+            height: 3.75rem;
+            width: 3.75rem;
+            background-image: url("../icons/fruit-placeholder.jpg");
+            background-size: cover;
+            background-position: left;
+            margin-right: 1em;
+            border-radius: 0.5em;
+        }
+
+        &-icons {
+            display: flex;
+            margin-left: auto;
+            column-gap: 1em;
+        }
+
+        &-icon {
+            cursor: pointer;
+            transition: transform 0.1s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
 }
