@@ -1,0 +1,21 @@
+.all-fruits {
+    &__header {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    &__footer {
+        margin-top: 1em;
+    }
+
+    &__confirm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

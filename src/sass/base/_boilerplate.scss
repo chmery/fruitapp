@@ -9,10 +9,11 @@ body {
     padding: 0;
     margin-top: 10vh;
     background: var(--backgrond-color);
-    max-width: 550px;
-    min-width: 450px;
+    max-width: 35rem;
+    min-width: 28.75rem;
 }
 
 main {
     margin: 0 1em;
+    position: relative;
 }

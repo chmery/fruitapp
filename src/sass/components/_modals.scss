@@ -1,0 +1,6 @@
+@use "../abstracts/mixins";
+
+dialog {
+    @include mixins.white-container;
+    border: none;
+}
