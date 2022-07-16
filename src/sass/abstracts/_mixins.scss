@@ -1,0 +1,39 @@
+@mixin white-container {
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+@mixin gray-container {
+    box-sizing: border-box;
+    width: 100%;
+    background: var(--bright-container);
+    border-radius: 1em;
+    padding: 0.7em 1em;
+    transition: background 0.1s;
+
+    &:hover {
+        background: var(--dark-container);
+    }
+}
+
+@mixin image-thumbnail {
+    margin-right: 1em;
+    border-radius: 0.5em;
+    height: 3.75rem;
+    width: 3.75rem;
+    background-position: left;
+    background-size: cover;
+    background-image: url("../icons/fruit-placeholder.jpg");
+}
+
+@mixin icon-hover {
+    cursor: pointer;
+    transition: transform 0.1s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}

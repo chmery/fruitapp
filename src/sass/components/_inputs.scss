@@ -1,0 +1,24 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input {
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+input {
+    color: var(--dark-text);
+    font-size: 1.125rem;
+}
+
+input::placeholder {
+    font-size: 1.125rem;
+    color: var(--bright-text);
+    font-weight: 300;
+}

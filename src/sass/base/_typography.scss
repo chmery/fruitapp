@@ -32,13 +32,12 @@ p.bright {
     font-size: 1rem;
 }
 
-input {
-    color: var(--dark-text);
-    font-size: 1.125rem;
+p.bold {
+    font-weight: 600;
 }
 
-input::placeholder {
-    font-size: 1.125rem;
-    color: var(--bright-text);
-    font-weight: 300;
+span.bold-span {
+    color: var(--dark-text);
+    font-size: 2rem;
+    font-weight: 600;
 }

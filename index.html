@@ -53,6 +53,69 @@
                     </div>
                 </div>
             </section>
+            <section class="calculator">
+                <h1 class="calculator__h1">CALCULATE CALORIES</h1>
+                <h3 class="calculator__h3">Create a set of fruits & calculate calories</h3>
+                <div class="calculator__container">
+                    <p class="calculator__consume">You will consume:</p>
+                    <p class="calculator__kcal">
+                        <span class="calculator__kcal-amount bold-span">100</span> kcal
+                    </p>
+                    <div class="calculator__macronutrients">
+                        <div class="calculator__proteins">
+                            <p class="calculator__proteins-amount bold">4.1g</p>
+                            <p class="calculator__proteins-name">Proteins</p>
+                        </div>
+                        <div class="calculator__fats">
+                            <p class="calculator__fats-amount bold">1.1g</p>
+                            <p class="calculator__fats-name">Fats</p>
+                        </div>
+                        <div class="calculator__carbs">
+                            <p class="calculator__carbs-amount bold">13.5g</p>
+                            <p class="calculator__carbs-name">Carbs</p>
+                        </div>
+                    </div>
+                    <div class="calculator__items">
+                        <div class="calculator__item">
+                            <div class="calculator__item-image"></div>
+                            <div class="calculator__item-text">
+                                <p class="calculator__item-name">Banana</p>
+                                <p class="calculator__item-kcal bright">95 kcal per 100g</p>
+                                <p class="calculator__item-macronutrients bright">
+                                    P: 1.2g | F: 0.4g | C: 11.3g
+                                </p>
+                            </div>
+                            <div class="calculator__item-action">
+                                <div class="calculator__item-icons">
+                                    <img
+                                        class="calculator__item-icon"
+                                        src="src/icons/heart-grey.svg"
+                                    />
+                                    <img
+                                        class="calculator__item-icon"
+                                        src="src/icons/exit-grey.svg"
+                                    />
+                                </div>
+                                <input
+                                    class="calculator-item-input"
+                                    type="number"
+                                    placeholder="g"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calculator__btns">
+                        <button class="calculator__btns-favourites">
+                            Select from favourites
+                            <img class="calculator__btns-icon" src="src/icons/dark-heart.svg" />
+                        </button>
+                        <button class="calculator__btns-calculate">
+                            Calculate
+                            <img class="calculator__btns-icon" src="src/icons/dark-right.svg" />
+                        </button>
+                    </div>
+                </div>
+            </section>
         </main>
     </body>
 </html>
