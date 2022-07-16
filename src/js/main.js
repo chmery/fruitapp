@@ -1,11 +1,11 @@
-const modal = document.querySelector(".all-fruits");
-const openModal = document.querySelector(".calculator__btns-calculate");
-const closeModal = document.querySelector(".all-fruits__confirm");
+const allFruitsModal = document.querySelector(".all-fruits");
+const openAllFruitsModal = document.querySelector(".search__show-all");
+const closeAllFruitsModal = document.querySelector(".all-fruits__confirm");
 
-openModal.addEventListener("click", () => {
-    modal.show();
+openAllFruitsModal.addEventListener("click", () => {
+    allFruitsModal.showModal();
 });
 
-closeModal.addEventListener("click", () => {
-    modal.close();
+closeAllFruitsModal.addEventListener("click", () => {
+    allFruitsModal.close();
 });

@@ -3,4 +3,8 @@ button {
     padding: 1em 1.5em;
     font-size: 1.125rem;
     border-radius: 1em;
+
+    &:focus {
+        outline: none;
+    }
 }

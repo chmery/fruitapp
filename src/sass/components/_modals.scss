@@ -3,4 +3,6 @@
 dialog {
     @include mixins.white-container;
     border: none;
+    max-width: 33rem;
+    min-width: 27rem;
 }
