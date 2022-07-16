@@ -16,10 +16,8 @@
         "url": "https://github.com/chmery/fruitapp/issues"
     },
     "homepage": "https://github.com/chmery/fruitapp#readme",
-    "dependencies": {
-        "@parcel/transformer-sass": "^2.6.2"
-    },
     "devDependencies": {
-        "parcel": "^2.6.2"
+        "parcel": "^2.6.2",
+        "@parcel/transformer-sass": "^2.6.2"
     }
 }
