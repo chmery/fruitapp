@@ -5,4 +5,43 @@ dialog {
     border: none;
     max-width: 33rem;
     min-width: 27rem;
+    overflow: hidden;
+}
+
+dialog > header,
+dialog > footer {
+    text-align: center;
+    position: sticky;
+    z-index: 5;
+    background: #fff;
+    padding-bottom: 1em;
+}
+
+dialog > footer {
+    padding-top: 2em;
+}
+
+dialog p[class*="__sort"],
+dialog p[class*="__close"] {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.1s;
+
+    [class*="-icon"] {
+        vertical-align: bottom;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+dialog div[class*="__list"] {
+    position: relative;
+    z-index: 1;
+    max-height: 25rem;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
 }

@@ -120,12 +120,12 @@
             </section>
 
             <dialog class="all-fruits">
-                <div class="all-fruits__header">
+                <header class="all-fruits__header">
                     <p class="all-fruits__heading bold large">All fruits</p>
                     <p class="all-fruits__sort">
                         Sort by <img class="all-fruits__sort-icon" src="src/icons/down-dark.svg" />
                     </p>
-                </div>
+                </header>
                 <div class="all-fruits__list">
                     <!-- Temporary -->
                     <div class="search__result">
@@ -185,11 +185,74 @@
                     </div>
                     <!-- Temporary -->
                 </div>
-                <div class="all-fruits__footer">
-                    <p class="all-fruits__confirm">
-                        Done <img class="all-fruits__confirm-icon" src="src/icons/right-dark.svg" />
+                <footer class="all-fruits__footer">
+                    <p class="all-fruits__close">
+                        Done <img class="all-fruits__close-icon" src="src/icons/right-dark.svg" />
                     </p>
+                </footer>
+            </dialog>
+            <dialog class="favourites">
+                <header class="favourites__header">
+                    <p class="favourites__heading bold large">Your favourites</p>
+                    <p class="favourites__sort">
+                        Sort by <img class="favourites__sort-icon" src="src/icons/down-dark.svg" />
+                    </p>
+                </header>
+                <div class="favourites__list">
+                    <!-- Temporary -->
+                    <div class="search__result">
+                        <div class="search__result-image"></div>
+                        <div class="search__result-text">
+                            <p class="search__result-name">Banana</p>
+                            <p class="search__result-kcal bright">95 kcal per 100g</p>
+                        </div>
+                        <div class="search__result-icons">
+                            <img class="search__result-icon" src="src/icons/plus-grey.svg" />
+                            <img class="search__result-icon" src="src/icons/heart-grey.svg" />
+                        </div>
+                    </div>
+                    <div class="search__result">
+                        <div class="search__result-image"></div>
+                        <div class="search__result-text">
+                            <p class="search__result-name">Banana</p>
+                            <p class="search__result-kcal bright">95 kcal per 100g</p>
+                        </div>
+                        <div class="search__result-icons">
+                            <img class="search__result-icon" src="src/icons/plus-grey.svg" />
+                            <img class="search__result-icon" src="src/icons/heart-grey.svg" />
+                        </div>
+                    </div>
+                    <div class="search__result">
+                        <div class="search__result-image"></div>
+                        <div class="search__result-text">
+                            <p class="search__result-name">Banana</p>
+                            <p class="search__result-kcal bright">95 kcal per 100g</p>
+                        </div>
+                        <div class="search__result-icons">
+                            <img class="search__result-icon" src="src/icons/plus-grey.svg" />
+                            <img class="search__result-icon" src="src/icons/heart-grey.svg" />
+                        </div>
+                    </div>
+                    <div class="search__result">
+                        <div class="search__result-image"></div>
+                        <div class="search__result-text">
+                            <p class="search__result-name">Banana</p>
+                            <p class="search__result-kcal bright">95 kcal per 100g</p>
+                        </div>
+                        <div class="search__result-icons">
+                            <img class="search__result-icon" src="src/icons/plus-grey.svg" />
+                            <img class="search__result-icon" src="src/icons/heart-grey.svg" />
+                        </div>
+                    </div>
+                    <!-- Temporary -->
                 </div>
+
+                <footer class="favourites__footer">
+                    <p class="favourites__close">
+                        Go back
+                        <img class="all-fruits__close-icon" src="src/icons/right-dark.svg" />
+                    </p>
+                </footer>
             </dialog>
         </main>
     </body>
