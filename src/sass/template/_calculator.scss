@@ -7,9 +7,12 @@
         @include mixins.white-container;
         margin-top: 1.5em;
         padding-top: 2em;
+        overflow: hidden;
     }
 
-    &__container > p {
+    &__header {
+        position: sticky;
+        z-index: 5;
         text-align: center;
     }
 
@@ -30,9 +33,13 @@
     }
 
     &__items {
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         row-gap: 1em;
+        max-height: 25rem;
+        overflow-x: auto;
     }
 
     &__item {
@@ -73,6 +80,7 @@
     }
 
     &__btns > button {
+        align-items: center;
         display: flex;
         cursor: pointer;
         transition: transform 0.1s;
@@ -83,9 +91,12 @@
     }
 
     &__btns {
+        position: sticky;
+        z-index: 5;
         display: flex;
+        column-gap: 1em;
         justify-content: space-between;
-        margin-top: 1.5em;
+        padding-top: 1.5em;
 
         &-favourites {
             background: var(--bright-pink);
