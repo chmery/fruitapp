@@ -70,8 +70,9 @@
             column-gap: 1em;
         }
 
-        &-icon {
+        &-icons > i {
             @include mixins.icon-hover;
+            color: var(--bright-text);
         }
     }
 }

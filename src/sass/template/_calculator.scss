@@ -59,15 +59,18 @@
         }
 
         &-icons {
+            margin-top: 0.8em;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
         }
 
-        &-icon {
+        &-icons > i {
             @include mixins.icon-hover;
+            color: var(--bright-text);
         }
 
         input {
+            margin-top: 1em;
             height: 1.5em;
             border: none;
             text-align: center;
@@ -106,8 +109,12 @@
             background: var(--dark-pink);
         }
 
-        &-icon {
-            margin-left: 0.5em;
+        &-favourites,
+        &-calculate {
+            & > i {
+                margin-left: 0.5em;
+                color: #fff;
+            }
         }
     }
 }
