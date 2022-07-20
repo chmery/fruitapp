@@ -1,4 +1,4 @@
-export let fruits;
+export let fruits = [];
 
 const getFruitsData = async () => {
     try {

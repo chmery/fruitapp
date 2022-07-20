@@ -1,18 +1,39 @@
 import { fruits } from "./fruits-data";
+import { MAX_SEARCH_RES } from "./config";
+
+let numResults;
+
+const renderResult = (parentEl, markup) => {
+    parentEl.style.opacity = "1";
+    parentEl.insertAdjacentHTML("beforeend", markup);
+    numResults++;
+};
+
+const removeResultsContainer = (parentEl) => {
+    parentEl.innerHTML = "";
+    parentEl.style.opacity = "0";
+};
+
+const setInitialValues = (parentEl) => {
+    parentEl.innerHTML = "";
+    numResults = 0;
+};
 
 document.querySelector(".search__input").addEventListener("input", (e) => {
-    const value = e.target.value.toLowerCase();
+    const inputValue = e.target.value.toLowerCase().trim();
     const parentEl = document.querySelector(".search__results");
 
-    parentEl.innerHTML = "";
+    setInitialValues(parentEl);
 
-    fruits.forEach((element) => {
+    fruits.forEach((fruit) => {
+        if (numResults === MAX_SEARCH_RES) return;
+
         const markup = `
         <div class="search__result">
             <div class="search__result-image"></div>
             <div class="search__result-text">
-                <p class="search__result-name">${element.name}</p>
-                <p class="search__result-kcal bright">${element.nutritions.calories} kcal per 100g</p>
+                <p class="search__result-name">${fruit.name}</p>
+                <p class="search__result-kcal bright">${fruit.nutritions.calories} kcal per 100g</p>
             </div>
             <div class="search__result-icons">
                 <img class="search__result-icon" src="./src/icons/plus-grey.svg" />
@@ -20,20 +41,11 @@ document.querySelector(".search__input").addEventListener("input", (e) => {
             </div>
         </div>
         `;
+        const fruitName = fruit.name.toLowerCase();
+        const isInputValueInName = fruitName.includes(inputValue);
 
-        const isValueInName = element.name.toLowerCase().includes(value);
-        if (isValueInName) {
-            parentEl.style.opacity = "1";
-            parentEl.insertAdjacentHTML("beforeend", markup);
-        }
+        if (isInputValueInName) renderResult(parentEl, markup);
     });
 
-    if (value === "") {
-        parentEl.innerHTML = "";
-        parentEl.style.opacity = "0";
-    }
-
-    if (value !== "" && parentEl.innerHTML === "") {
-        parentEl.style.opacity = "0";
-    }
+    if (!inputValue || (inputValue && !parentEl.innerHTML)) removeResultsContainer(parentEl);
 });
