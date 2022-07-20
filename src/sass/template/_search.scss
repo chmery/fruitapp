@@ -51,7 +51,8 @@
         flex-direction: column;
         row-gap: 1em;
         position: absolute;
-        z-index: 5;
+        z-index: 10;
+        transition: opacity 0.2s;
     }
 
     &__result {
