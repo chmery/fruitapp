@@ -33,7 +33,10 @@ const assignData = async () => {
     const fruitsData = await getFruitsData();
     const fruitsImages = await getFruitsImages();
 
-    fruitsData.forEach((fruit, i) => (fruit.image = fruitsImages[i].link));
-    fruits = fruitsData;
+    const fruitsDataWithImages = await fruitsData.map((fruit) => ({
+        ...fruit,
+        image: fruitsImages[fruit.name.toLowerCase()],
+    }));
+    fruits = fruitsDataWithImages;
 };
 assignData();
