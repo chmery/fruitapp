@@ -1,15 +1,18 @@
 import { fruits } from "./fruits-data";
 
+const favouritesList = document.querySelector(".favourites__list");
 const searchResultsList = document.querySelector(".search__results");
 const allFruitsList = document.querySelector(".all-fruits__list");
 
-const renderCalculatorElement = (markup) => {
+const allLists = [favouritesList, searchResultsList, allFruitsList];
+
+const renderCalculatorItem = (markup) => {
     const calculatorItemsList = document.querySelector(".calculator__items");
     calculatorItemsList.insertAdjacentHTML("beforeend", markup);
 };
 
-[searchResultsList, allFruitsList].forEach((element) => {
-    element.addEventListener("click", (e) => {
+allLists.forEach((list) => {
+    list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-plus")?.dataset.fruitId;
         if (!fruitId) return;
 
@@ -25,7 +28,7 @@ const renderCalculatorElement = (markup) => {
             </div>
             <div class="calculator__item-action">
                 <div class="calculator__item-icons">
-                    <i class="fa-regular fa-heart fa-lg"></i>
+                    <i class="fa-regular fa-heart fa-lg" data-fruit-id="${fruitId}"></i>
                     <i class="fa-solid fa-xmark fa-lg" data-fruit-id="${fruitId}"></i>
                 </div>
                 <input
@@ -37,6 +40,6 @@ const renderCalculatorElement = (markup) => {
         </div>
         `;
 
-        renderCalculatorElement(markup);
+        renderCalculatorItem(markup);
     });
 });

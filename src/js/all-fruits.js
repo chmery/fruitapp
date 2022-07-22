@@ -17,7 +17,7 @@ showAllBtn.addEventListener("click", () => {
             </div>
             <div class="search__result-icons">
                 <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}"></i>
-                <i class="fa-regular fa-heart fa-lg"></i>
+                <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}"></i>
             </div>
         </div>
         `;
