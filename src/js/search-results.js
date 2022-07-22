@@ -29,7 +29,7 @@ document.querySelector(".search__input").addEventListener("input", (e) => {
         if (numResults === MAX_SEARCH_RES) return;
 
         const markup = `
-        <div class="search__result">
+        <div class="search__result item">
             <div class="search__result-image" style="background-image: url(${fruit.image})"></div>
             <div class="search__result-text">
                 <p class="search__result-name">${fruit.name}</p>

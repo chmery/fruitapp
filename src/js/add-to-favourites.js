@@ -3,7 +3,7 @@ import { fruits } from "./fruits-data";
 const favouritesList = document.querySelector(".favourites__list");
 const searchResultsList = document.querySelector(".search__results");
 const allFruitsList = document.querySelector(".all-fruits__list");
-const calculatorItemsList = document.querySelector(".calculator__items");
+const calculatorItemsList = document.querySelector(".calculator__list");
 
 const allLists = [favouritesList, searchResultsList, allFruitsList, calculatorItemsList];
 
@@ -15,7 +15,7 @@ allLists.forEach((list) => {
         if (!fruitId) return;
 
         const markup = `
-        <div class="search__result">
+        <div class="search__result item">
             <div class="search__result-image" style="background-image: url(${fruits[fruitId].image})"></div>
             <div class="search__result-text">
                 <p class="search__result-name">${fruits[fruitId].name}</p>

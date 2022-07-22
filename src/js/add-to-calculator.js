@@ -7,7 +7,7 @@ const allFruitsList = document.querySelector(".all-fruits__list");
 const allLists = [favouritesList, searchResultsList, allFruitsList];
 
 const renderCalculatorItem = (markup) => {
-    const calculatorItemsList = document.querySelector(".calculator__items");
+    const calculatorItemsList = document.querySelector(".calculator__list");
     calculatorItemsList.insertAdjacentHTML("beforeend", markup);
 };
 
@@ -17,7 +17,7 @@ allLists.forEach((list) => {
         if (!fruitId) return;
 
         const markup = `
-        <div class="calculator__item">
+        <div class="calculator__item item">
             <div class="calculator__item-image" style="background-image: url(${fruits[fruitId].image})"></div>
             <div class="calculator__item-text">
                 <p class="calculator__item-name">${fruits[fruitId].name}</p>
