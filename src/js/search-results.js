@@ -25,7 +25,7 @@ document.querySelector(".search__input").addEventListener("input", (e) => {
 
     setInitialValues(parentEl);
 
-    fruits.forEach((fruit) => {
+    fruits.forEach((fruit, i) => {
         if (numResults === MAX_SEARCH_RES) return;
 
         const markup = `
@@ -36,7 +36,7 @@ document.querySelector(".search__input").addEventListener("input", (e) => {
                 <p class="search__result-kcal bright">${fruit.nutritions.calories} kcal per 100g</p>
             </div>
             <div class="search__result-icons">
-                <i class="fa-solid fa-plus fa-lg"></i>
+                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}"></i>
                 <i class="fa-regular fa-heart fa-lg"></i>
             </div>
         </div>
