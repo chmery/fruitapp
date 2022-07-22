@@ -16,7 +16,7 @@ const getFruitsData = async () => {
         const data = await getJSON("https://www.fruityvice.com/api/fruit/all");
         return data;
     } catch (error) {
-        alert(error.message);
+        throw error;
     }
 };
 
@@ -25,18 +25,22 @@ const getFruitsImages = async () => {
         const data = await getJSON("https://fruitappi.herokuapp.com/fruits");
         return data;
     } catch (error) {
-        alert(error.message);
+        throw error;
     }
 };
 
 const assignData = async () => {
-    const fruitsData = await getFruitsData();
-    const fruitsImages = await getFruitsImages();
+    try {
+        const fruitsData = await getFruitsData();
+        const fruitsImages = await getFruitsImages();
 
-    const fruitsDataWithImages = await fruitsData.map((fruit) => ({
-        ...fruit,
-        image: fruitsImages[fruit.name.toLowerCase()],
-    }));
-    fruits = fruitsDataWithImages;
+        const fruitsDataWithImages = await fruitsData.map((fruit) => ({
+            ...fruit,
+            image: fruitsImages[fruit.name.toLowerCase()],
+        }));
+        fruits = fruitsDataWithImages;
+    } catch (error) {
+        alert(error.message);
+    }
 };
 assignData();
