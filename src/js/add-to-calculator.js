@@ -1,17 +1,12 @@
 import { fruits } from "./fruits-data";
+import * as list from "./lists";
 
-const favouritesList = document.querySelector(".favourites__list");
-const searchResultsList = document.querySelector(".search__results");
-const allFruitsList = document.querySelector(".all-fruits__list");
+const listsWithPlusIcon = [list.favourites, list.searchResults, list.allFruits];
 
-const allLists = [favouritesList, searchResultsList, allFruitsList];
+const renderCalculatorItem = (markup) =>
+    list.calculatorItems.insertAdjacentHTML("beforeend", markup);
 
-const renderCalculatorItem = (markup) => {
-    const calculatorItemsList = document.querySelector(".calculator__list");
-    calculatorItemsList.insertAdjacentHTML("beforeend", markup);
-};
-
-allLists.forEach((list) => {
+listsWithPlusIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-plus")?.dataset.fruitId;
         if (!fruitId) return;

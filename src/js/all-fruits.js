@@ -1,12 +1,11 @@
 import { fruits } from "./fruits-data";
+import * as list from "./lists";
 
 const showAllBtn = document.querySelector(".search__show-all");
 
 const renderFruit = (parentEl, markup) => parentEl.insertAdjacentHTML("beforeend", markup);
 
 showAllBtn.addEventListener("click", () => {
-    const allFruitsList = document.querySelector(".all-fruits__list");
-
     fruits.forEach((fruit, i) => {
         const markup = `
         <div class="search__result">
@@ -22,6 +21,6 @@ showAllBtn.addEventListener("click", () => {
         </div>
         `;
 
-        renderFruit(allFruitsList, markup);
+        renderFruit(list.allFruits, markup);
     });
 });

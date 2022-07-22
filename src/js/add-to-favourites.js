@@ -1,15 +1,16 @@
 import { fruits } from "./fruits-data";
+import * as list from "./lists";
 
-const favouritesList = document.querySelector(".favourites__list");
-const searchResultsList = document.querySelector(".search__results");
-const allFruitsList = document.querySelector(".all-fruits__list");
-const calculatorItemsList = document.querySelector(".calculator__list");
+const listsWithHeartIcon = [
+    list.favourites,
+    list.searchResults,
+    list.allFruits,
+    list.calculatorItems,
+];
 
-const allLists = [favouritesList, searchResultsList, allFruitsList, calculatorItemsList];
+const addToFavourites = (markup) => list.favourites.insertAdjacentHTML("beforeend", markup);
 
-const addToFavourites = (markup) => favouritesList.insertAdjacentHTML("beforeend", markup);
-
-allLists.forEach((list) => {
+listsWithHeartIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-heart")?.dataset.fruitId;
         if (!fruitId) return;

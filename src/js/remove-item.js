@@ -1,16 +1,16 @@
-const favouritesList = document.querySelector(".favourites__list");
-const calculatorItemsList = document.querySelector(".calculator__list");
+import * as list from "./lists";
 
-const allLists = [favouritesList, calculatorItemsList];
+const listsWithRemoveIcon = [list.favourites, list.calculatorItems];
 
 const removeItemFromList = (itemContainer, itemToRemove) => itemContainer.removeChild(itemToRemove);
 
-allLists.forEach((list) => {
+listsWithRemoveIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
-        const itemToRemove = e.target.closest(".fa-xmark").closest(".item");
-        const itemContainer = e.target.closest("[class$='__list']");
+        const itemRemoveIcon = e.target.closest(".fa-xmark");
+        if (!itemRemoveIcon) return;
 
-        if (!itemToRemove || !itemContainer) return;
+        const itemToRemove = itemRemoveIcon.closest(".item");
+        const itemContainer = e.target.closest("[class$='__list']");
 
         removeItemFromList(itemContainer, itemToRemove);
     });
