@@ -6,18 +6,8 @@ const favouritesModal = document.querySelector(".favourites");
 const openFavouritesModal = document.querySelector(".calculator__btns-favourites");
 const closeFavouritesModal = document.querySelector(".favourites__close");
 
-openAllFruitsModal.addEventListener("click", () => {
-    allFruitsModal.showModal();
-});
+openAllFruitsModal.addEventListener("click", () => allFruitsModal.showModal());
+closeAllFruitsModal.addEventListener("click", () => allFruitsModal.close());
 
-closeAllFruitsModal.addEventListener("click", () => {
-    allFruitsModal.close();
-});
-
-openFavouritesModal.addEventListener("click", () => {
-    favouritesModal.showModal();
-});
-
-closeFavouritesModal.addEventListener("click", () => {
-    favouritesModal.close();
-});
+openFavouritesModal.addEventListener("click", () => favouritesModal.showModal());
+closeFavouritesModal.addEventListener("click", () => favouritesModal.close());
