@@ -2,7 +2,8 @@ import * as list from "./lists";
 
 const listsWithRemoveIcon = [list.favourites, list.calculatorItems];
 
-const removeItemFromList = (itemContainer, itemToRemove) => itemContainer.removeChild(itemToRemove);
+export const removeItemFromList = (itemContainer, itemToRemove) =>
+    itemContainer.removeChild(itemToRemove);
 
 listsWithRemoveIcon.forEach((list) => {
     list.addEventListener("click", (e) => {

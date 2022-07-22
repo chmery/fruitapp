@@ -8,7 +8,7 @@ const renderFruit = (parentEl, markup) => parentEl.insertAdjacentHTML("beforeend
 showAllBtn.addEventListener("click", () => {
     fruits.forEach((fruit, i) => {
         const markup = `
-        <div class="search__result">
+        <div class="search__result item">
             <div class="search__result-image" style="background-image: url(${fruit.image})"></div>
             <div class="search__result-text">
                 <p class="search__result-name">${fruit.name}</p>

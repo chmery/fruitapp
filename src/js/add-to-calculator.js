@@ -1,18 +1,32 @@
 import { fruits } from "./fruits-data";
-import * as list from "./lists";
+import * as lists from "./lists";
+import { removeItemFromList } from "./remove-item";
 
-const listsWithPlusIcon = [list.favourites, list.searchResults, list.allFruits];
+const addedFruits = [];
+
+const listsWithPlusIcon = [lists.favourites, lists.searchResults, lists.allFruits];
 
 const renderCalculatorItem = (markup) =>
-    list.calculatorItems.insertAdjacentHTML("beforeend", markup);
+    lists.calculatorItems.insertAdjacentHTML("beforeend", markup);
+
+const removeFruitFromAdded = (id) => addedFruits.splice(addedFruits.indexOf(id), 1);
 
 listsWithPlusIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-plus")?.dataset.fruitId;
         if (!fruitId) return;
 
+        const isFruitAdded = addedFruits.includes(fruitId);
+        const calculatorItem = document.querySelector(`[data-calculator-fruit-id="${fruitId}"]`);
+
+        if (isFruitAdded) {
+            removeItemFromList(lists.calculatorItems, calculatorItem);
+            removeFruitFromAdded(fruitId);
+            return;
+        }
+
         const markup = `
-        <div class="calculator__item item">
+        <div class="calculator__item item" data-calculator-fruit-id="${fruitId}">
             <div class="calculator__item-image" style="background-image: url(${fruits[fruitId].image})"></div>
             <div class="calculator__item-text">
                 <p class="calculator__item-name">${fruits[fruitId].name}</p>
@@ -36,5 +50,6 @@ listsWithPlusIcon.forEach((list) => {
         `;
 
         renderCalculatorItem(markup);
+        addedFruits.push(fruitId);
     });
 });
