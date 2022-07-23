@@ -1,19 +1,34 @@
 import { fruits } from "./fruits-data";
-import * as list from "./lists";
+import * as lists from "./lists";
 
 const listsWithHeartIcon = [
-    list.favourites,
-    list.searchResults,
-    list.allFruits,
-    list.calculatorItems,
+    lists.favourites,
+    lists.searchResults,
+    lists.allFruits,
+    lists.calculatorItems,
 ];
 
-const addToFavourites = (markup) => list.favourites.insertAdjacentHTML("beforeend", markup);
+const addToFavourites = (markup) => lists.favourites.insertAdjacentHTML("beforeend", markup);
+
+export const favouritesAmount = () => lists.favourites.querySelectorAll(".item").length;
+
+export const renderEmptyMessage = () => {
+    const markup = `<p class="favourites__empty bright">You haven't added any fruits yet 🥺</p>`;
+    lists.favourites.insertAdjacentHTML("afterbegin", markup);
+};
+const removeEmptyMessage = () => {
+    const emptyMessage = document.querySelector(".favourites__empty");
+    lists.favourites.removeChild(emptyMessage);
+};
 
 listsWithHeartIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-heart")?.dataset.fruitId;
         if (!fruitId) return;
+
+        /*         if (numFavourites < 1) {
+            renderEmptyMessage();
+        } */
 
         const markup = `
         <div class="search__result item">
@@ -30,5 +45,9 @@ listsWithHeartIcon.forEach((list) => {
         `;
 
         addToFavourites(markup);
+
+        if (favouritesAmount() === 1) {
+            removeEmptyMessage();
+        }
     });
 });

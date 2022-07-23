@@ -46,3 +46,7 @@ dialog div[class*="__list"] {
     flex-direction: column;
     row-gap: 1em;
 }
+
+dialog p.favourites__empty {
+    text-align: center;
+}
