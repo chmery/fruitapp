@@ -2,26 +2,25 @@ import { fruits } from "./fruits-data";
 import * as lists from "./lists";
 import { removeItemFromList } from "./remove-item";
 
-const addedFruits = [];
+export const addedToCalculator = [];
+export const removeIdFromAdded = (id) => addedToCalculator.splice(addedToCalculator.indexOf(id), 1);
 
 const listsWithPlusIcon = [lists.favourites, lists.searchResults, lists.allFruits];
 
 const renderCalculatorItem = (markup) =>
     lists.calculatorItems.insertAdjacentHTML("beforeend", markup);
 
-const removeFruitFromAdded = (id) => addedFruits.splice(addedFruits.indexOf(id), 1);
-
 listsWithPlusIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-plus")?.dataset.fruitId;
         if (!fruitId) return;
 
-        const isFruitAdded = addedFruits.includes(fruitId);
+        const isFruitAdded = addedToCalculator.includes(fruitId);
         const calculatorItem = document.querySelector(`[data-calculator-fruit-id="${fruitId}"]`);
 
         if (isFruitAdded) {
             removeItemFromList(lists.calculatorItems, calculatorItem);
-            removeFruitFromAdded(fruitId);
+            removeIdFromAdded(fruitId);
             return;
         }
 
@@ -44,12 +43,13 @@ listsWithPlusIcon.forEach((list) => {
                     class="calculator-item-input"
                     type="number"
                     placeholder="g"
+                    data-fruit-id="${fruitId}"
                 />
             </div>
         </div>
         `;
 
         renderCalculatorItem(markup);
-        addedFruits.push(fruitId);
+        addedToCalculator.push(fruitId);
     });
 });
