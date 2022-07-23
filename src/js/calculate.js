@@ -3,6 +3,18 @@ import { addedToCalculator } from "./add-to-calculator";
 
 const calculateBtn = document.querySelector(".calculator__btns-calculate");
 
+const renderCalculationResults = (calories, proteins, fats, carbs) => {
+    const caloriesOutput = document.querySelector(".calculator__kcal-amount");
+    const proteinsOutput = document.querySelector(".calculator__proteins-amount");
+    const fatsOutput = document.querySelector(".calculator__fats-amount");
+    const carbsOutput = document.querySelector(".calculator__carbs-amount");
+
+    caloriesOutput.textContent = calories;
+    proteinsOutput.textContent = `${proteins}g`;
+    fatsOutput.textContent = `${fats}g`;
+    carbsOutput.textContent = `${carbs}g`;
+};
+
 calculateBtn.addEventListener("click", () => {
     if (!addedToCalculator) return;
     const allCalories = [];
@@ -14,10 +26,8 @@ calculateBtn.addEventListener("click", () => {
         const weightInput = document.querySelector(`input[data-fruit-id="${fruitId}"]`);
         const weight = weightInput.value;
 
-        const { nutritions } = fruits[fruitId];
-
         const calcValue = (nutrient) => {
-            const macronutrient = nutritions[nutrient];
+            const macronutrient = fruits[fruitId].nutritions[nutrient];
             const macronutrientValue = macronutrient * (weight / 100);
             return macronutrientValue;
         };
@@ -34,4 +44,6 @@ calculateBtn.addEventListener("click", () => {
     const totalProteins = calcTotalValue(allProteins);
     const totalFats = calcTotalValue(allFats);
     const totalCarbs = calcTotalValue(allCarbs);
+
+    renderCalculationResults(totalCalories, totalProteins, totalFats, totalCarbs);
 });
