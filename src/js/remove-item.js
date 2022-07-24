@@ -2,6 +2,7 @@ import * as lists from "./lists";
 import { removeIdFromAdded } from "./add-to-calculator";
 import { renderEmptyMessage } from "./add-to-favourites";
 import { favouritesAmount } from "./add-to-favourites";
+import { removeIdFromFavouritesAdded } from "./add-to-favourites";
 
 const listsWithRemoveIcon = [lists.favourites, lists.calculatorItems];
 
@@ -22,7 +23,13 @@ listsWithRemoveIcon.forEach((list) => {
             removeIdFromAdded(fruitId);
         }
 
+        const isFavouriteBeingRemoved = itemToRemove.classList.contains("favourites");
         const isLastFavouriteBeingRemoved = favouritesAmount() === 1 ? true : false;
+
+        if (isFavouriteBeingRemoved) {
+            const fruitId = itemToRemove.dataset.favouritesFruitId;
+            removeIdFromFavouritesAdded(fruitId);
+        }
 
         if (isLastFavouriteBeingRemoved) {
             renderEmptyMessage();

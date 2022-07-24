@@ -1,5 +1,8 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
+import { removeItemFromList } from "./remove-item";
+
+const addedToFavourites = [];
 
 const listsWithHeartIcon = [
     lists.favourites,
@@ -16,22 +19,37 @@ export const renderEmptyMessage = () => {
     const markup = `<p class="favourites__empty bright">You haven't added any fruits yet 🥺</p>`;
     lists.favourites.insertAdjacentHTML("afterbegin", markup);
 };
+
 const removeEmptyMessage = () => {
     const emptyMessage = document.querySelector(".favourites__empty");
     lists.favourites.removeChild(emptyMessage);
 };
+
+export const removeIdFromFavouritesAdded = (id) =>
+    addedToFavourites.splice(addedToFavourites.indexOf(id), 1);
 
 listsWithHeartIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-heart")?.dataset.fruitId;
         if (!fruitId) return;
 
-        /*         if (numFavourites < 1) {
-            renderEmptyMessage();
-        } */
+        const isFruitInFavourites = addedToFavourites.includes(fruitId);
+        const favouritesItem = document.querySelector(`[data-favourites-fruit-id="${fruitId}"]`);
+
+        if (isFruitInFavourites) {
+            removeItemFromList(lists.favourites, favouritesItem);
+            removeIdFromFavouritesAdded(fruitId);
+
+            if (favouritesAmount() === 0) {
+                renderEmptyMessage();
+            }
+            return;
+        }
+
+        // Favourites class temporarily added
 
         const markup = `
-        <div class="search__result item">
+        <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
             <div class="search__result-image" style="background-image: url(${fruits[fruitId].image})"></div>
             <div class="search__result-text">
                 <p class="search__result-name">${fruits[fruitId].name}</p>
@@ -45,6 +63,7 @@ listsWithHeartIcon.forEach((list) => {
         `;
 
         addToFavourites(markup);
+        addedToFavourites.push(fruitId);
 
         if (favouritesAmount() === 1) {
             removeEmptyMessage();

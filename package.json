@@ -4,7 +4,9 @@
     "description": "Search for fruits and calculate calories.",
     "scripts": {
         "start": "parcel index.html",
-        "build": "parcel build index.html --public-url . --no-source-maps"
+        "build": "parcel build index.html --public-url . --no-source-maps",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "repository": {
         "type": "git",
@@ -17,7 +19,10 @@
     },
     "homepage": "https://github.com/chmery/fruitapp#readme",
     "devDependencies": {
-        "parcel": "^2.6.2",
         "@parcel/transformer-sass": "^2.6.2"
+    },
+    "dependencies": {
+        "parcel": "^2.6.2",
+        "gh-pages": "^4.0.0"
     }
 }
