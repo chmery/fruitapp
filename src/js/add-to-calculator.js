@@ -12,9 +12,10 @@ const renderCalculatorItem = (markup) =>
 
 listsWithPlusIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
-        const fruitId = e.target.closest(".fa-plus")?.dataset.fruitId;
-        if (!fruitId) return;
+        const plusIcon = e.target.closest(".fa-plus");
+        if (!plusIcon) return;
 
+        const fruitId = plusIcon.dataset.fruitId;
         const isFruitAdded = addedToCalculator.includes(fruitId);
         const calculatorItem = document.querySelector(`[data-calculator-fruit-id="${fruitId}"]`);
 

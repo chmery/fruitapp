@@ -28,13 +28,14 @@ const removeEmptyMessage = () => {
 
 listsWithHeartIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
-        const fruitId = e.target.closest(".fa-heart")?.dataset.fruitId;
-        if (!fruitId) return;
+        const heartIcon = e.target.closest(".fa-heart");
+        if (!heartIcon) return;
 
-        const isFruitInFavourites = addedToFavourites.includes(fruitId);
+        const fruitId = heartIcon.dataset.fruitId;
+        const isInFavourites = addedToFavourites.includes(fruitId);
         const favouritesItem = document.querySelector(`[data-favourites-fruit-id="${fruitId}"]`);
 
-        if (isFruitInFavourites) {
+        if (isInFavourites) {
             removeItemFromList(lists.favourites, favouritesItem);
             removeIdFromAdded(addedToFavourites, fruitId);
 
@@ -45,7 +46,6 @@ listsWithHeartIcon.forEach((list) => {
         }
 
         // Favourites class temporarily added
-
         const markup = `
         <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
             <div class="search__result-image" style="background-image: url(${fruits[fruitId].image})"></div>

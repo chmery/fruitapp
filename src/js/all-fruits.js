@@ -4,6 +4,10 @@ import * as list from "./lists";
 const showAllBtn = document.querySelector(".search__show-all");
 
 const renderFruit = (parentEl, markup) => parentEl.insertAdjacentHTML("beforeend", markup);
+export const clearAllFruitsList = () => {
+    const allFruitsList = document.querySelector(".all-fruits__list");
+    allFruitsList.innerHTML = "";
+};
 
 showAllBtn.addEventListener("click", () => {
     fruits.forEach((fruit, i) => {

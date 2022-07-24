@@ -12,10 +12,10 @@ export const removeItemFromList = (itemContainer, itemToRemove) =>
 
 listsWithRemoveIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
-        const itemRemoveIcon = e.target.closest(".fa-xmark");
-        if (!itemRemoveIcon) return;
+        const removeIcon = e.target.closest(".fa-xmark");
+        if (!removeIcon) return;
 
-        const itemToRemove = itemRemoveIcon.closest(".item");
+        const itemToRemove = removeIcon.closest(".item");
         const itemContainer = e.target.closest("[class$='__list']");
 
         const isCalculatorItemBeingRemoved = itemToRemove.classList.contains("calculator__item");
