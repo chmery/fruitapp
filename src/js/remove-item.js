@@ -1,9 +1,12 @@
 import * as lists from "./lists";
-import { renderEmptyMessage } from "./add-to-favourites";
-import { favouritesAmount } from "./add-to-favourites";
 import { removeIdFromAdded } from "./helpers";
 import { addedToCalculator } from "./add-to-calculator";
-import { addedToFavourites } from "./add-to-favourites";
+import {
+    renderEmptyMessage,
+    favouritesAmount,
+    addedToFavourites,
+    removeItemMarkup,
+} from "./add-to-favourites";
 
 const listsWithRemoveIcon = [lists.favourites, lists.calculatorItems];
 
@@ -31,6 +34,7 @@ listsWithRemoveIcon.forEach((list) => {
         if (isFavouriteBeingRemoved) {
             const fruitId = itemToRemove.dataset.favouritesFruitId;
             removeIdFromAdded(addedToFavourites, fruitId);
+            removeItemMarkup(fruitId);
         }
 
         if (isLastFavouriteBeingRemoved) {

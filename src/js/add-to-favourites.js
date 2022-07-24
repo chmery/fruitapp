@@ -1,7 +1,7 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
 import { removeItemFromList } from "./remove-item";
-import { removeIdFromAdded } from "./helpers";
+import { clearList, removeIdFromAdded } from "./helpers";
 
 export const addedToFavourites = [];
 
@@ -12,7 +12,14 @@ const listsWithHeartIcon = [
     lists.calculatorItems,
 ];
 
-const addToFavourites = (markup) => lists.favourites.insertAdjacentHTML("beforeend", markup);
+const favouriteItemsMarkup = [];
+
+export const renderFavouriteItems = () => {
+    clearList(lists.favourites);
+    favouriteItemsMarkup.forEach((item) =>
+        lists.favourites.insertAdjacentHTML("beforeend", item[1])
+    );
+};
 
 export const favouritesAmount = () => lists.favourites.querySelectorAll(".item").length;
 
@@ -21,10 +28,12 @@ export const renderEmptyMessage = () => {
     lists.favourites.insertAdjacentHTML("afterbegin", markup);
 };
 
-const removeEmptyMessage = () => {
-    const emptyMessage = document.querySelector(".favourites__empty");
-    lists.favourites.removeChild(emptyMessage);
+export const removeItemMarkup = (id) => {
+    const indexOfGivenId = favouriteItemsMarkup.findIndex((element) => element[0] === id);
+    favouriteItemsMarkup.splice(indexOfGivenId, 1);
 };
+
+// dostajemy tylko id
 
 listsWithHeartIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
@@ -36,6 +45,7 @@ listsWithHeartIcon.forEach((list) => {
         const favouritesItem = document.querySelector(`[data-favourites-fruit-id="${fruitId}"]`);
 
         if (isInFavourites) {
+            removeItemMarkup(fruitId);
             removeItemFromList(lists.favourites, favouritesItem);
             removeIdFromAdded(addedToFavourites, fruitId);
 
@@ -60,9 +70,7 @@ listsWithHeartIcon.forEach((list) => {
         </div>
         `;
 
-        addToFavourites(markup);
+        favouriteItemsMarkup.push([fruitId, markup]);
         addedToFavourites.push(fruitId);
-
-        if (favouritesAmount() === 1) removeEmptyMessage();
     });
 });
