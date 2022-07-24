@@ -1,8 +1,9 @@
 import * as lists from "./lists";
-import { removeIdFromAdded } from "./add-to-calculator";
 import { renderEmptyMessage } from "./add-to-favourites";
 import { favouritesAmount } from "./add-to-favourites";
-import { removeIdFromFavouritesAdded } from "./add-to-favourites";
+import { removeIdFromAdded } from "./helpers";
+import { addedToCalculator } from "./add-to-calculator";
+import { addedToFavourites } from "./add-to-favourites";
 
 const listsWithRemoveIcon = [lists.favourites, lists.calculatorItems];
 
@@ -16,19 +17,20 @@ listsWithRemoveIcon.forEach((list) => {
 
         const itemToRemove = itemRemoveIcon.closest(".item");
         const itemContainer = e.target.closest("[class$='__list']");
-        const itemInCalculator = itemToRemove.className === "calculator__item item" ? true : false;
 
-        if (itemInCalculator) {
-            const fruitId = itemToRemove.dataset.calculatorFruitId;
-            removeIdFromAdded(fruitId);
-        }
+        const isCalculatorItemBeingRemoved = itemToRemove.classList.contains("calculator__item");
 
         const isFavouriteBeingRemoved = itemToRemove.classList.contains("favourites");
         const isLastFavouriteBeingRemoved = favouritesAmount() === 1 ? true : false;
 
+        if (isCalculatorItemBeingRemoved) {
+            const fruitId = itemToRemove.dataset.calculatorFruitId;
+            removeIdFromAdded(addedToCalculator, fruitId);
+        }
+
         if (isFavouriteBeingRemoved) {
             const fruitId = itemToRemove.dataset.favouritesFruitId;
-            removeIdFromFavouritesAdded(fruitId);
+            removeIdFromAdded(addedToFavourites, fruitId);
         }
 
         if (isLastFavouriteBeingRemoved) {

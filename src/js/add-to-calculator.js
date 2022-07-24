@@ -1,9 +1,9 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
 import { removeItemFromList } from "./remove-item";
+import { removeIdFromAdded } from "./helpers";
 
 export const addedToCalculator = [];
-export const removeIdFromAdded = (id) => addedToCalculator.splice(addedToCalculator.indexOf(id), 1);
 
 const listsWithPlusIcon = [lists.favourites, lists.searchResults, lists.allFruits];
 
@@ -20,7 +20,7 @@ listsWithPlusIcon.forEach((list) => {
 
         if (isFruitAdded) {
             removeItemFromList(lists.calculatorItems, calculatorItem);
-            removeIdFromAdded(fruitId);
+            removeIdFromAdded(addedToCalculator, fruitId);
             return;
         }
 

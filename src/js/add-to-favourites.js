@@ -1,8 +1,9 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
 import { removeItemFromList } from "./remove-item";
+import { removeIdFromAdded } from "./helpers";
 
-const addedToFavourites = [];
+export const addedToFavourites = [];
 
 const listsWithHeartIcon = [
     lists.favourites,
@@ -25,9 +26,6 @@ const removeEmptyMessage = () => {
     lists.favourites.removeChild(emptyMessage);
 };
 
-export const removeIdFromFavouritesAdded = (id) =>
-    addedToFavourites.splice(addedToFavourites.indexOf(id), 1);
-
 listsWithHeartIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const fruitId = e.target.closest(".fa-heart")?.dataset.fruitId;
@@ -38,7 +36,7 @@ listsWithHeartIcon.forEach((list) => {
 
         if (isFruitInFavourites) {
             removeItemFromList(lists.favourites, favouritesItem);
-            removeIdFromFavouritesAdded(fruitId);
+            removeIdFromAdded(addedToFavourites, fruitId);
 
             if (favouritesAmount() === 0) {
                 renderEmptyMessage();
@@ -65,8 +63,6 @@ listsWithHeartIcon.forEach((list) => {
         addToFavourites(markup);
         addedToFavourites.push(fruitId);
 
-        if (favouritesAmount() === 1) {
-            removeEmptyMessage();
-        }
+        if (favouritesAmount() === 1) removeEmptyMessage();
     });
 });
