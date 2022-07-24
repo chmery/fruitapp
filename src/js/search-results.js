@@ -1,5 +1,7 @@
 import { fruits } from "./fruits-data";
 import { MAX_SEARCH_RES } from "./config";
+import { setIconColorOnRender } from "./helpers";
+import { addedToFavourites } from "./add-to-favourites";
 
 let numResults;
 
@@ -37,7 +39,10 @@ document.querySelector(".search__input").addEventListener("input", (e) => {
             </div>
             <div class="search__result-icons">
                 <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}"></i>
-                <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}"></i>
+                <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
+            addedToFavourites,
+            i
+        )}></i>
             </div>
         </div>
         `;

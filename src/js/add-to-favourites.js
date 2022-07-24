@@ -1,9 +1,7 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
-import { removeItemFromList } from "./remove-item";
-import { clearList, removeIdFromAdded } from "./helpers";
-
-export const addedToFavourites = [];
+import { clearList, removeIdFromAdded, removeItemMarkup, setIconColor } from "./helpers";
+import { renderCalculatorItems as updateCalculatorHeartIcons } from "./add-to-calculator";
 
 const listsWithHeartIcon = [
     lists.favourites,
@@ -12,13 +10,14 @@ const listsWithHeartIcon = [
     lists.calculatorItems,
 ];
 
-const favouriteItemsMarkup = [];
+export const addedToFavourites = [];
+export const favouriteItemsMarkup = [];
 
 export const renderFavouriteItems = () => {
-    clearList(lists.favourites);
-    favouriteItemsMarkup.forEach((item) =>
-        lists.favourites.insertAdjacentHTML("beforeend", item[1])
-    );
+    favouriteItemsMarkup.forEach((item) => {
+        const markup = item[1];
+        lists.favourites.insertAdjacentHTML("beforeend", markup);
+    });
 };
 
 export const favouritesAmount = () => lists.favourites.querySelectorAll(".item").length;
@@ -28,13 +27,6 @@ export const renderEmptyMessage = () => {
     lists.favourites.insertAdjacentHTML("afterbegin", markup);
 };
 
-export const removeItemMarkup = (id) => {
-    const indexOfGivenId = favouriteItemsMarkup.findIndex((element) => element[0] === id);
-    favouriteItemsMarkup.splice(indexOfGivenId, 1);
-};
-
-// dostajemy tylko id
-
 listsWithHeartIcon.forEach((list) => {
     list.addEventListener("click", (e) => {
         const heartIcon = e.target.closest(".fa-heart");
@@ -42,12 +34,12 @@ listsWithHeartIcon.forEach((list) => {
 
         const fruitId = heartIcon.dataset.fruitId;
         const isInFavourites = addedToFavourites.includes(fruitId);
-        const favouritesItem = document.querySelector(`[data-favourites-fruit-id="${fruitId}"]`);
 
         if (isInFavourites) {
-            removeItemMarkup(fruitId);
-            removeItemFromList(lists.favourites, favouritesItem);
+            removeItemMarkup(favouriteItemsMarkup, fruitId);
             removeIdFromAdded(addedToFavourites, fruitId);
+            setIconColor(heartIcon, "#b0b0b0");
+            updateCalculatorHeartIcons();
 
             if (favouritesAmount() === 0) {
                 renderEmptyMessage();
@@ -70,7 +62,9 @@ listsWithHeartIcon.forEach((list) => {
         </div>
         `;
 
+        setIconColor(heartIcon, "#ec7676");
         favouriteItemsMarkup.push([fruitId, markup]);
         addedToFavourites.push(fruitId);
+        updateCalculatorHeartIcons();
     });
 });

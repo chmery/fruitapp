@@ -1,5 +1,7 @@
 import { fruits } from "./fruits-data";
 import * as list from "./lists";
+import { addedToFavourites } from "./add-to-favourites";
+import { setIconColorOnRender } from "./helpers";
 
 const showAllBtn = document.querySelector(".search__show-all");
 
@@ -16,7 +18,10 @@ showAllBtn.addEventListener("click", () => {
             </div>
             <div class="search__result-icons">
                 <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}"></i>
-                <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}"></i>
+                <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
+            addedToFavourites,
+            i
+        )}></i>
             </div>
         </div>
         `;

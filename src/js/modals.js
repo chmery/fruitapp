@@ -30,6 +30,7 @@ openFavouritesModal.addEventListener("click", () => {
     const favouriteList = document.querySelector(".favourites__list");
 
     favouritesModal.showModal();
+    clearList(lists.favourites);
     renderFavouriteItems();
 
     if (favouritesAmount() < 1 && favouriteList.innerHTML === "") renderEmptyMessage();
@@ -40,7 +41,7 @@ closeFavouritesModal.addEventListener("click", () => {
     clearList(lists.favourites);
 });
 
-window.addEventListener("keydown", () => {
+window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         favouritesModal.close();
         clearList(lists.favourites);
