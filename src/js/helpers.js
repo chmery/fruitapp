@@ -7,7 +7,8 @@ export const removeItemMarkup = (array, id) => {
     array.splice(indexOfGivenId, 1);
 };
 
-export const setIconColor = (icon, hex) => (icon.style.color = `${hex}`);
+export const setIconColor = (icon, isAdded) =>
+    isAdded ? (icon.style.color = "#ec7676") : (icon.style.color = "#b0b0b0");
 
 export const setIconColorOnRender = (array, id) => {
     const isItemInArray = array.includes(id.toString());

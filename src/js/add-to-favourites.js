@@ -38,7 +38,7 @@ listsWithHeartIcon.forEach((list) => {
         if (isInFavourites) {
             removeItemMarkup(favouriteItemsMarkup, fruitId);
             removeIdFromAdded(addedToFavourites, fruitId);
-            setIconColor(heartIcon, "#b0b0b0");
+            setIconColor(heartIcon, false);
             updateCalculatorHeartIcons();
 
             if (favouritesAmount() === 0) {
@@ -62,7 +62,7 @@ listsWithHeartIcon.forEach((list) => {
         </div>
         `;
 
-        setIconColor(heartIcon, "#ec7676");
+        setIconColor(heartIcon, true);
         favouriteItemsMarkup.push([fruitId, markup]);
         addedToFavourites.push(fruitId);
         updateCalculatorHeartIcons();
