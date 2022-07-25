@@ -1,12 +1,6 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
-import {
-    clearList,
-    removeIdFromAdded,
-    removeItemMarkup,
-    setIconColor,
-    setIconColorOnRender,
-} from "./helpers";
+import { removeIdFromAdded, removeItemMarkup, setIconColor, setIconColorOnRender } from "./helpers";
 import {
     addedToCalculator,
     renderCalculatorItems as updateCalculatorHeartIcons,
@@ -52,6 +46,11 @@ const updatePlusIcons = () => {
 };
 
 export const renderFavouriteItems = () => {
+    if (addedToFavourites.length === 0) {
+        renderEmptyMessage();
+        return;
+    }
+
     updatePlusIcons();
 
     favouriteItemsMarkup.forEach((item) => {

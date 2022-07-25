@@ -27,13 +27,9 @@ window.addEventListener("keydown", (e) => {
 });
 
 openFavouritesModal.addEventListener("click", () => {
-    const favouriteList = document.querySelector(".favourites__list");
-
     favouritesModal.showModal();
     clearList(lists.favourites);
     renderFavouriteItems();
-
-    if (favouritesAmount() < 1 && favouriteList.innerHTML === "") renderEmptyMessage();
 });
 
 closeFavouritesModal.addEventListener("click", () => {
