@@ -2,6 +2,7 @@ import { fruits } from "./fruits-data";
 import { MAX_SEARCH_RES } from "./config";
 import { setIconColorOnRender } from "./helpers";
 import { addedToFavourites } from "./add-to-favourites";
+import { addedToCalculator } from "./add-to-calculator";
 
 let numResults;
 
@@ -38,7 +39,10 @@ document.querySelector(".search__input").addEventListener("input", (e) => {
                 <p class="search__result-kcal bright">${fruit.nutritions.calories} kcal per 100g</p>
             </div>
             <div class="search__result-icons">
-                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}"></i>
+                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
+            addedToCalculator,
+            i
+        )}></i>
                 <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
             addedToFavourites,
             i

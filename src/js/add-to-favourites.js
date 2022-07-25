@@ -1,7 +1,16 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
-import { clearList, removeIdFromAdded, removeItemMarkup, setIconColor } from "./helpers";
-import { renderCalculatorItems as updateCalculatorHeartIcons } from "./add-to-calculator";
+import {
+    clearList,
+    removeIdFromAdded,
+    removeItemMarkup,
+    setIconColor,
+    setIconColorOnRender,
+} from "./helpers";
+import {
+    addedToCalculator,
+    renderCalculatorItems as updateCalculatorHeartIcons,
+} from "./add-to-calculator";
 
 const listsWithHeartIcon = [
     lists.favourites,
@@ -13,7 +22,38 @@ const listsWithHeartIcon = [
 export const addedToFavourites = [];
 export const favouriteItemsMarkup = [];
 
+const updatePlusIcons = () => {
+    favouriteItemsMarkup.forEach((item) => {
+        const fruitId = item[0];
+
+        const newMarkup = `
+        <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
+            <div class="search__result-image" style="background-image: url(${
+                fruits[fruitId].image
+            })"></div>
+            <div class="search__result-text">
+                <p class="search__result-name">${fruits[fruitId].name}</p>
+                <p class="search__result-kcal bright">${
+                    fruits[fruitId].nutritions.calories
+                } kcal per 100g</p>
+            </div>
+            <div class="search__result-icons">
+                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${fruitId}" ${setIconColorOnRender(
+            addedToCalculator,
+            fruitId
+        )}></i>
+                <i class="fa-solid fa-xmark fa-lg" data-fruit-id="${fruitId}"></i>
+            </div>
+        </div>
+        `;
+
+        item[1] = newMarkup;
+    });
+};
+
 export const renderFavouriteItems = () => {
+    updatePlusIcons();
+
     favouriteItemsMarkup.forEach((item) => {
         const markup = item[1];
         lists.favourites.insertAdjacentHTML("beforeend", markup);
@@ -50,13 +90,20 @@ listsWithHeartIcon.forEach((list) => {
         // Favourites class temporarily added
         const markup = `
         <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
-            <div class="search__result-image" style="background-image: url(${fruits[fruitId].image})"></div>
+            <div class="search__result-image" style="background-image: url(${
+                fruits[fruitId].image
+            })"></div>
             <div class="search__result-text">
                 <p class="search__result-name">${fruits[fruitId].name}</p>
-                <p class="search__result-kcal bright">${fruits[fruitId].nutritions.calories} kcal per 100g</p>
+                <p class="search__result-kcal bright">${
+                    fruits[fruitId].nutritions.calories
+                } kcal per 100g</p>
             </div>
             <div class="search__result-icons">
-                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${fruitId}"></i>
+                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${fruitId}" ${setIconColorOnRender(
+            addedToCalculator,
+            fruitId
+        )}></i>
                 <i class="fa-solid fa-xmark fa-lg" data-fruit-id="${fruitId}"></i>
             </div>
         </div>

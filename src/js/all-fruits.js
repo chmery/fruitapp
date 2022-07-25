@@ -2,6 +2,7 @@ import { fruits } from "./fruits-data";
 import * as list from "./lists";
 import { addedToFavourites } from "./add-to-favourites";
 import { setIconColorOnRender } from "./helpers";
+import { addedToCalculator } from "./add-to-calculator";
 
 const showAllBtn = document.querySelector(".search__show-all");
 
@@ -17,7 +18,10 @@ showAllBtn.addEventListener("click", () => {
                 <p class="search__result-kcal bright">${fruit.nutritions.calories} kcal per 100g</p>
             </div>
             <div class="search__result-icons">
-                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}"></i>
+                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
+            addedToCalculator,
+            i
+        )}></i>
                 <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
             addedToFavourites,
             i

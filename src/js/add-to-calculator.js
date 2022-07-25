@@ -1,7 +1,13 @@
 import { fruits } from "./fruits-data";
 import * as lists from "./lists";
 import { removeItemFromList } from "./remove-item";
-import { removeIdFromAdded, removeItemMarkup, clearList, setIconColorOnRender } from "./helpers";
+import {
+    removeIdFromAdded,
+    removeItemMarkup,
+    clearList,
+    setIconColorOnRender,
+    setIconColor,
+} from "./helpers";
 import { addedToFavourites } from "./add-to-favourites";
 
 const listsWithPlusIcon = [lists.favourites, lists.searchResults, lists.allFruits];
@@ -74,6 +80,7 @@ listsWithPlusIcon.forEach((list) => {
             removeItemMarkup(calculatorItemsMarkup, fruitId);
             removeItemFromList(lists.calculatorItems, calculatorItem);
             removeIdFromAdded(addedToCalculator, fruitId);
+            setIconColor(plusIcon, false);
             return;
         }
 
@@ -114,6 +121,7 @@ listsWithPlusIcon.forEach((list) => {
         calculatorItemsMarkup.push([fruitId, markup]);
         addedToCalculator.push(fruitId);
 
+        setIconColor(plusIcon, true);
         clearList(lists.calculatorItems);
         renderCalculatorItems();
     });
