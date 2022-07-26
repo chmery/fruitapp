@@ -1,15 +1,25 @@
 import { fruits } from "./fruits-data";
-import * as list from "./lists";
+import * as lists from "./lists";
 import { addedToFavourites } from "./add-to-favourites";
 import { setIconColorOnRender } from "./helpers";
 import { addedToCalculator } from "./add-to-calculator";
 
 const showAllBtn = document.querySelector(".search__show-all");
 
-const renderFruit = (parentEl, markup) => parentEl.insertAdjacentHTML("beforeend", markup);
+const allFruitsMarkup = [];
+export const clearAllFruitsMarkup = () => (allFruitsMarkup.length = 0);
+
+const renderAllFruits = () => {
+    allFruitsMarkup.forEach((fruit) => {
+        const markup = fruit[0];
+        lists.allFruits.insertAdjacentHTML("beforeend", markup);
+    });
+};
 
 showAllBtn.addEventListener("click", () => {
     fruits.forEach((fruit, i) => {
+        const sortingData = fruit.nutritions;
+
         const markup = `
         <div class="search__result item">
             <div class="search__result-image" style="background-image: url(${fruit.image})"></div>
@@ -30,6 +40,8 @@ showAllBtn.addEventListener("click", () => {
         </div>
         `;
 
-        renderFruit(list.allFruits, markup);
+        allFruitsMarkup.push([markup, sortingData]);
     });
+
+    renderAllFruits();
 });
