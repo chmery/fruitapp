@@ -18,7 +18,7 @@ export const favouriteItemsMarkup = [];
 
 const updatePlusIcons = () => {
     favouriteItemsMarkup.forEach((item) => {
-        const fruitId = item[0];
+        const fruitId = item[2];
 
         const newMarkup = `
         <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
@@ -41,7 +41,7 @@ const updatePlusIcons = () => {
         </div>
         `;
 
-        item[1] = newMarkup;
+        item[0] = newMarkup;
     });
 };
 
@@ -54,7 +54,7 @@ export const renderFavouriteItems = () => {
     updatePlusIcons();
 
     favouriteItemsMarkup.forEach((item) => {
-        const markup = item[1];
+        const markup = item[0];
         lists.favourites.insertAdjacentHTML("beforeend", markup);
     });
 };
@@ -72,6 +72,7 @@ listsWithHeartIcon.forEach((list) => {
         if (!heartIcon) return;
 
         const fruitId = heartIcon.dataset.fruitId;
+        const sortingData = fruits[fruitId].nutritions;
         const isInFavourites = addedToFavourites.includes(fruitId);
 
         if (isInFavourites) {
@@ -109,7 +110,7 @@ listsWithHeartIcon.forEach((list) => {
         `;
 
         setIconColor(heartIcon, true);
-        favouriteItemsMarkup.push([fruitId, markup]);
+        favouriteItemsMarkup.push([markup, sortingData, fruitId]);
         addedToFavourites.push(fruitId);
         updateCalculatorHeartIcons();
     });
