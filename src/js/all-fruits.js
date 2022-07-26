@@ -6,7 +6,7 @@ import { addedToCalculator } from "./add-to-calculator";
 
 const showAllBtn = document.querySelector(".search__show-all");
 
-const allFruitsMarkup = [];
+export const allFruitsMarkup = [];
 export const clearAllFruitsMarkup = () => (allFruitsMarkup.length = 0);
 
 const renderAllFruits = () => {

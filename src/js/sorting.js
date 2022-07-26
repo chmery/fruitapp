@@ -1,10 +1,8 @@
-import { fruits } from "./fruits-data";
-
-export const getSortedFruits = (macronutrient, order) => {
-    const sortedFruits = [...fruits].sort((a, b) => {
+export const getSortedFruits = (arrayBeingSorted, macronutrient, order) => {
+    const sortedFruits = [...arrayBeingSorted].sort((a, b) => {
         return order === "ascending"
-            ? a.nutritions[macronutrient] - b.nutritions[macronutrient]
-            : b.nutritions[macronutrient] - a.nutritions[macronutrient];
+            ? a[1][macronutrient] - b[1][macronutrient]
+            : b[1][macronutrient] - a[1][macronutrient];
     });
 
     return sortedFruits;

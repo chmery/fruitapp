@@ -1,4 +1,6 @@
 import { getSortedFruits } from "./sorting";
+import { allFruitsMarkup } from "./all-fruits";
+import { favouriteItemsMarkup, favouritesAmount } from "./add-to-favourites";
 
 const sortBtns = document.querySelectorAll("p[class$='sort']");
 
@@ -67,7 +69,18 @@ window.addEventListener("click", (e) => {
         const order = item?.dataset.order;
 
         if (!macronutrient || !order) return;
-        const sortedFruits = getSortedFruits(macronutrient, order);
+
+        const modal = e.target.closest("dialog");
+        const isAllFruitsOpened = modal.className.includes("all-fruits");
+        const isFavouritesOpened = modal.className.includes("favourites");
+
+        if (isAllFruitsOpened) {
+            const sortedFruits = getSortedFruits(allFruitsMarkup, macronutrient, order);
+        }
+
+        if (isFavouritesOpened) {
+            const sortedFruits = getSortedFruits(favouriteItemsMarkup, macronutrient, order);
+        }
     }
 
     if ((!isDropdownItemTarget() && !isSortBtnTarget()) || isDropdownItemTarget()) {
