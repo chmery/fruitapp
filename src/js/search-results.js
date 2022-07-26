@@ -1,5 +1,4 @@
 import { fruits } from "./fruits-data";
-import { MAX_SEARCH_RES } from "./config";
 import { setIconColorOnRender } from "./helpers";
 import { addedToFavourites } from "./add-to-favourites";
 import { addedToCalculator } from "./add-to-calculator";
@@ -25,8 +24,9 @@ const setInitialValues = (parentEl) => {
 document.querySelector(".search__input").addEventListener("input", (e) => {
     const inputValue = e.target.value.toLowerCase().trim();
     const parentEl = document.querySelector(".search__results");
+    const MAX_SEARCH_RES = 5;
 
-    setInitialValues(parentEl);
+    setInitialValues(parentEl, numResults);
 
     fruits.forEach((fruit, i) => {
         if (numResults === MAX_SEARCH_RES) return;
@@ -50,6 +50,7 @@ document.querySelector(".search__input").addEventListener("input", (e) => {
             </div>
         </div>
         `;
+
         const fruitName = fruit.name.toLowerCase();
         const isInputValueInName = fruitName.includes(inputValue);
 

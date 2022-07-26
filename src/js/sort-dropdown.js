@@ -40,6 +40,31 @@ const renderDropdownList = (parentEl) => {
 
 const removeDropdownList = (parentEl) => parentEl.removeChild(parentEl.querySelector(".dropdown"));
 
+const sortFruits = (clickedEl) => {
+    const item = clickedEl.closest(".dropdown-item");
+
+    const macronutrient = item?.dataset.macronutrient;
+    const order = item?.dataset.order;
+
+    if (!macronutrient || !order) return;
+
+    const modal = clickedEl.closest("dialog");
+    const isAllFruitsOpened = modal.className.includes("all-fruits");
+    const isFavouritesOpened = modal.className.includes("favourites");
+
+    if (isAllFruitsOpened) {
+        const sortedFruits = getSortedFruits(allFruitsMarkup, macronutrient, order);
+        clearList(lists.allFruits);
+        renderSortedFruits(lists.allFruits, sortedFruits);
+    }
+
+    if (isFavouritesOpened && favouritesAmount() > 1) {
+        const sortedFruits = getSortedFruits(favouriteItemsMarkup, macronutrient, order);
+        clearList(lists.favourites);
+        renderSortedFruits(lists.favourites, sortedFruits);
+    }
+};
+
 sortBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         const dropdownList = document.querySelector(".dropdown");
@@ -65,28 +90,7 @@ window.addEventListener("click", (e) => {
         Array.from(sortBtns).some((btn) => btn === e.target.closest("p[class$='sort']"));
 
     if (isDropdownItemTarget) {
-        const item = e.target.closest(".dropdown-item");
-
-        const macronutrient = item?.dataset.macronutrient;
-        const order = item?.dataset.order;
-
-        if (!macronutrient || !order) return;
-
-        const modal = e.target.closest("dialog");
-        const isAllFruitsOpened = modal.className.includes("all-fruits");
-        const isFavouritesOpened = modal.className.includes("favourites");
-
-        if (isAllFruitsOpened) {
-            const sortedFruits = getSortedFruits(allFruitsMarkup, macronutrient, order);
-            clearList(lists.allFruits);
-            renderSortedFruits(lists.allFruits, sortedFruits);
-        }
-
-        if (isFavouritesOpened && favouritesAmount() !== 0) {
-            const sortedFruits = getSortedFruits(favouriteItemsMarkup, macronutrient, order);
-            clearList(lists.favourites);
-            renderSortedFruits(lists.favourites, sortedFruits);
-        }
+        sortFruits(e.target);
     }
 
     if ((!isDropdownItemTarget() && !isSortBtnTarget()) || isDropdownItemTarget()) {

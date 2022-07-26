@@ -13,7 +13,9 @@ const getJSON = async (url) => {
 
 const getFruitsData = async () => {
     try {
-        const data = await getJSON("https://www.fruityvice.com/api/fruit/all");
+        const data = await getJSON(
+            "https://corsus.herokuapp.com/https://www.fruityvice.com/api/fruit/all"
+        );
         return data;
     } catch (error) {
         throw error;
@@ -22,7 +24,9 @@ const getFruitsData = async () => {
 
 const getFruitsImages = async () => {
     try {
-        const data = await getJSON("https://fruitappi.herokuapp.com/fruits");
+        const data = await getJSON(
+            "https://corsus.herokuapp.com/https://fruitappi.herokuapp.com/fruits"
+        );
         return data;
     } catch (error) {
         throw error;

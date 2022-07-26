@@ -16,32 +16,35 @@ const listsWithHeartIcon = [
 export const addedToFavourites = [];
 export const favouriteItemsMarkup = [];
 
-const updatePlusIcons = () => {
+const generateMarkup = (fruitId) => {
+    const markup = `
+    <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
+    <div class="search__result-image" style="background-image: url(${fruits[fruitId].image})"></div>
+    <div class="search__result-text">
+        <p class="search__result-name">${fruits[fruitId].name}</p>
+        <p class="search__result-kcal bright">${
+            fruits[fruitId].nutritions.calories
+        } kcal per 100g</p>
+    </div>
+    <div class="search__result-icons">
+        <i class="fa-solid fa-plus fa-lg" data-fruit-id="${fruitId}" ${setIconColorOnRender(
+        addedToCalculator,
+        fruitId
+    )}></i>
+        <i class="fa-solid fa-xmark fa-lg" data-fruit-id="${fruitId}"></i>
+    </div>
+    </div>
+    `;
+
+    return markup;
+};
+
+const updatePlusIconsColor = () => {
     favouriteItemsMarkup.forEach((item) => {
-        const fruitId = item[2];
+        const fruitId = item[0];
+        const markup = generateMarkup(fruitId);
 
-        const newMarkup = `
-        <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
-            <div class="search__result-image" style="background-image: url(${
-                fruits[fruitId].image
-            })"></div>
-            <div class="search__result-text">
-                <p class="search__result-name">${fruits[fruitId].name}</p>
-                <p class="search__result-kcal bright">${
-                    fruits[fruitId].nutritions.calories
-                } kcal per 100g</p>
-            </div>
-            <div class="search__result-icons">
-                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${fruitId}" ${setIconColorOnRender(
-            addedToCalculator,
-            fruitId
-        )}></i>
-                <i class="fa-solid fa-xmark fa-lg" data-fruit-id="${fruitId}"></i>
-            </div>
-        </div>
-        `;
-
-        item[0] = newMarkup;
+        item[1] = markup;
     });
 };
 
@@ -51,10 +54,10 @@ export const renderFavouriteItems = () => {
         return;
     }
 
-    updatePlusIcons();
+    updatePlusIconsColor();
 
     favouriteItemsMarkup.forEach((item) => {
-        const markup = item[0];
+        const markup = item[1];
         lists.favourites.insertAdjacentHTML("beforeend", markup);
     });
 };
@@ -87,31 +90,12 @@ listsWithHeartIcon.forEach((list) => {
             return;
         }
 
-        // Favourites class temporarily added
-        const markup = `
-        <div class="search__result item favourites" data-favourites-fruit-id="${fruitId}">
-            <div class="search__result-image" style="background-image: url(${
-                fruits[fruitId].image
-            })"></div>
-            <div class="search__result-text">
-                <p class="search__result-name">${fruits[fruitId].name}</p>
-                <p class="search__result-kcal bright">${
-                    fruits[fruitId].nutritions.calories
-                } kcal per 100g</p>
-            </div>
-            <div class="search__result-icons">
-                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${fruitId}" ${setIconColorOnRender(
-            addedToCalculator,
-            fruitId
-        )}></i>
-                <i class="fa-solid fa-xmark fa-lg" data-fruit-id="${fruitId}"></i>
-            </div>
-        </div>
-        `;
+        const markup = generateMarkup(fruitId);
+
+        favouriteItemsMarkup.push([fruitId, markup, sortingData]);
+        addedToFavourites.push(fruitId);
 
         setIconColor(heartIcon, true);
-        favouriteItemsMarkup.push([markup, sortingData, fruitId]);
-        addedToFavourites.push(fruitId);
         updateCalculatorHeartIcons();
     });
 });
