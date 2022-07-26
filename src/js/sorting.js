@@ -7,3 +7,10 @@ export const getSortedFruits = (arrayBeingSorted, macronutrient, order) => {
 
     return sortedFruits;
 };
+
+export const renderSortedFruits = (list, sortedFruits) => {
+    sortedFruits.forEach((fruit) => {
+        const markup = fruit[0];
+        list.insertAdjacentHTML("beforeend", markup);
+    });
+};

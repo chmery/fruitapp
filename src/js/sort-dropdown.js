@@ -1,6 +1,8 @@
-import { getSortedFruits } from "./sorting";
+import { getSortedFruits, renderSortedFruits } from "./sorting";
 import { allFruitsMarkup } from "./all-fruits";
 import { favouriteItemsMarkup, favouritesAmount } from "./add-to-favourites";
+import * as lists from "./lists";
+import { clearList } from "./helpers";
 
 const sortBtns = document.querySelectorAll("p[class$='sort']");
 
@@ -76,10 +78,14 @@ window.addEventListener("click", (e) => {
 
         if (isAllFruitsOpened) {
             const sortedFruits = getSortedFruits(allFruitsMarkup, macronutrient, order);
+            clearList(lists.allFruits);
+            renderSortedFruits(lists.allFruits, sortedFruits);
         }
 
-        if (isFavouritesOpened) {
+        if (isFavouritesOpened && favouritesAmount() !== 0) {
             const sortedFruits = getSortedFruits(favouriteItemsMarkup, macronutrient, order);
+            clearList(lists.favourites);
+            renderSortedFruits(lists.favourites, sortedFruits);
         }
     }
 
