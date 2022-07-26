@@ -11,7 +11,7 @@ export const clearAllFruitsMarkup = () => (allFruitsMarkup.length = 0);
 
 const renderAllFruits = () => {
     allFruitsMarkup.forEach((fruit) => {
-        const markup = fruit[0];
+        const markup = fruit[1];
         lists.allFruits.insertAdjacentHTML("beforeend", markup);
     });
 };
@@ -19,6 +19,7 @@ const renderAllFruits = () => {
 showAllBtn.addEventListener("click", () => {
     fruits.forEach((fruit, i) => {
         const sortingData = fruit.nutritions;
+        const fruitId = i;
 
         const markup = `
         <div class="search__result item">
@@ -28,19 +29,19 @@ showAllBtn.addEventListener("click", () => {
                 <p class="search__result-kcal bright">${fruit.nutritions.calories} kcal per 100g</p>
             </div>
             <div class="search__result-icons">
-                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
+                <i class="fa-solid fa-plus fa-lg" data-fruit-id="${fruitId}" ${setIconColorOnRender(
             addedToCalculator,
-            i
+            fruitId
         )}></i>
-                <i class="fa-regular fa-heart fa-lg" data-fruit-id="${i}" ${setIconColorOnRender(
+                <i class="fa-regular fa-heart fa-lg" data-fruit-id="${fruitId}" ${setIconColorOnRender(
             addedToFavourites,
-            i
+            fruitId
         )}></i>
             </div>
         </div>
         `;
 
-        allFruitsMarkup.push([markup, sortingData]);
+        allFruitsMarkup.push([fruitId, markup, sortingData]);
     });
 
     renderAllFruits();
