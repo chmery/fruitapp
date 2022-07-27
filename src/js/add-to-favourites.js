@@ -5,6 +5,7 @@ import {
     addedToCalculator,
     renderCalculatorItems as updateCalculatorHeartIcons,
 } from "./add-to-calculator";
+import emptyIcon from "url:../icons/empty.png";
 
 const listsWithHeartIcon = [
     lists.favourites,
@@ -65,7 +66,18 @@ export const renderFavouriteItems = () => {
 export const favouritesAmount = () => lists.favourites.querySelectorAll(".item").length;
 
 export const renderEmptyMessage = () => {
-    const markup = `<p class="favourites__empty bright">You haven't added any fruits yet 🥺</p>`;
+    const markup = `
+    <div class="favourites__empty">
+        <img
+            class="favourites__empty-image"
+            src="${emptyIcon}"
+            alt="sad apple"
+        />
+        <p class="favourites__empty-message bright">
+            You haven't added any fruits yet 🥺
+        </p>
+    </div>
+    `;
     lists.favourites.insertAdjacentHTML("afterbegin", markup);
 };
 
