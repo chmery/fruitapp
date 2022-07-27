@@ -1,5 +1,7 @@
 export let fruits = [];
 
+export const isDataAssigned = () => (fruits.length === 0 ? false : true);
+
 const getJSON = async (url) => {
     try {
         const response = await fetch(url);

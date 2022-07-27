@@ -1,4 +1,4 @@
-import { fruits } from "./fruits-data";
+import { fruits, isDataAssigned } from "./fruits-data";
 import * as lists from "./lists";
 import { addedToFavourites } from "./add-to-favourites";
 import { setIconColorOnRender } from "./helpers";
@@ -7,7 +7,28 @@ import { addedToCalculator } from "./add-to-calculator";
 const showAllBtn = document.querySelector(".search__show-all");
 
 export const allFruitsMarkup = [];
-export const clearAllFruitsMarkup = () => (allFruitsMarkup.length = 0);
+
+const stopChecking = () => clearInterval(renderSpinnerIfDataNotAssigned);
+
+const renderSpinner = () => {
+    if (isDataAssigned()) {
+        stopChecking();
+        generateMarkup();
+        renderAllFruits();
+        const spinner = document.querySelector(".loader");
+        if (!spinner) return;
+        lists.allFruits.removeChild(spinner);
+    }
+
+    if (!isDataAssigned()) {
+        const isSpinnerRendered = document.querySelector(".loader");
+        if (isSpinnerRendered) return;
+        const markup = `<span class="loader"></span>`;
+        lists.allFruits.insertAdjacentHTML("afterbegin", markup);
+    }
+};
+
+const renderSpinnerIfDataNotAssigned = setInterval(renderSpinner, 500);
 
 const renderAllFruits = () => {
     allFruitsMarkup.forEach((fruit) => {
@@ -16,7 +37,7 @@ const renderAllFruits = () => {
     });
 };
 
-showAllBtn.addEventListener("click", () => {
+const generateMarkup = () => {
     fruits.forEach((fruit, i) => {
         const sortingData = fruit.nutritions;
         const fruitId = i;
@@ -43,6 +64,6 @@ showAllBtn.addEventListener("click", () => {
 
         allFruitsMarkup.push([fruitId, markup, sortingData]);
     });
+};
 
-    renderAllFruits();
-});
+showAllBtn.addEventListener("click", () => renderAllFruits());

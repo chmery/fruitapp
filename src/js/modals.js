@@ -1,5 +1,4 @@
 import { renderFavouriteItems } from "./add-to-favourites";
-import { clearAllFruitsMarkup } from "./all-fruits";
 import { clearList } from "./helpers";
 import * as lists from "./lists";
 
@@ -16,14 +15,12 @@ openAllFruitsModal.addEventListener("click", () => allFruitsModal.showModal());
 closeAllFruitsModal.addEventListener("click", () => {
     allFruitsModal.close();
     clearList(lists.allFruits);
-    clearAllFruitsMarkup();
 });
 
 window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         allFruitsModal.close();
         clearList(lists.allFruits);
-        clearAllFruitsMarkup();
     }
 });
 
