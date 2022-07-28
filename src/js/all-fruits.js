@@ -7,13 +7,13 @@ import { addedToCalculator } from "./add-to-calculator";
 const showAllBtn = document.querySelector(".search__show-all");
 
 export const allFruitsMarkup = [];
+const clearAllFruitsMarkup = () => (allFruitsMarkup.length = 0);
 
 const renderControl = setInterval(() => {
     const spinner = lists.allFruits.querySelector(".loader");
 
     if (isDataAssigned()) {
         clearInterval(renderControl);
-        generateMarkup();
         renderAllFruits();
 
         if (spinner) lists.allFruits.removeChild(spinner);
@@ -23,6 +23,8 @@ const renderControl = setInterval(() => {
 }, 500);
 
 const renderAllFruits = () => {
+    generateMarkup();
+
     allFruitsMarkup.forEach((fruit) => {
         const markup = fruit[1];
         lists.allFruits.insertAdjacentHTML("beforeend", markup);
@@ -30,6 +32,7 @@ const renderAllFruits = () => {
 };
 
 const generateMarkup = () => {
+    clearAllFruitsMarkup();
     fruits.forEach((fruit, i) => {
         const sortingData = fruit.nutritions;
         const fruitId = i;
