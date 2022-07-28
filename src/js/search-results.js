@@ -1,16 +1,20 @@
-import { fruits } from "./fruits-data";
-import { setIconColorOnRender } from "./helpers";
+import { fruits, isDataAssigned } from "./fruits-data";
+import { setIconColorOnRender, renderSpinner } from "./helpers";
 import { addedToFavourites } from "./add-to-favourites";
 import { addedToCalculator } from "./add-to-calculator";
+import * as lists from "./lists";
 
 const searchResults = document.querySelector(".search__results");
 const searchInput = document.querySelector(".search__input");
 let numResults;
 
-const renderResult = (markup) => {
-    searchResults.style.opacity = "1";
-    searchResults.insertAdjacentHTML("beforeend", markup);
-    numResults++;
+const controlSpinner = () => {
+    const inputValue = searchInput.value;
+    const spinner = lists.searchResults.querySelector(".loader");
+
+    showResultsContainer();
+    if (!inputValue) removeResultsContainer();
+    if (!spinner) renderSpinner(lists.searchResults, true);
 };
 
 const removeResultsContainer = () => {
@@ -22,6 +26,8 @@ const setInitialValues = () => {
     searchResults.innerHTML = "";
     numResults = 0;
 };
+
+const showResultsContainer = () => (searchResults.style.opacity = "1");
 
 const generateMarkup = (fruit, fruitId) => {
     const markup = `
@@ -47,11 +53,15 @@ const generateMarkup = (fruit, fruitId) => {
     return markup;
 };
 
-searchInput.addEventListener("input", (e) => {
-    const inputValue = e.target.value.toLowerCase().trim();
-    const MAX_SEARCH_RES = 5;
+const renderResult = (markup) => {
+    searchResults.style.opacity = "1";
+    searchResults.insertAdjacentHTML("beforeend", markup);
+    numResults++;
+};
 
-    setInitialValues();
+const renderResults = () => {
+    const inputValue = searchInput.value.toLowerCase().trim();
+    const MAX_SEARCH_RES = 5;
 
     fruits.forEach((fruit, i) => {
         if (numResults === MAX_SEARCH_RES) return;
@@ -64,6 +74,28 @@ searchInput.addEventListener("input", (e) => {
 
         if (isInputValueInName) renderResult(markup);
     });
+};
+
+const removeSpinnerAndRenderResults = setInterval(() => {
+    const spinner = lists.searchResults.querySelector(".loader");
+
+    if (isDataAssigned() && spinner) {
+        lists.searchResults.removeChild(spinner);
+        renderResults();
+        clearInterval(removeSpinnerAndRenderResults);
+    }
+}, 500);
+
+searchInput.addEventListener("input", () => {
+    const inputValue = searchInput.value.toLowerCase().trim();
+
+    if (!isDataAssigned()) {
+        controlSpinner();
+        return;
+    }
+
+    setInitialValues();
+    renderResults();
 
     if (!inputValue || (inputValue && !searchResults.innerHTML)) removeResultsContainer();
 });

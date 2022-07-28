@@ -1,6 +1,7 @@
 @use "../abstracts/mixins";
 
-.loader {
+.loader,
+.search-loader {
     margin: auto;
     color: var(--dark-pink);
     font-size: 10px;
@@ -11,4 +12,8 @@
     text-indent: -9999em;
     @include mixins.spinner-animation;
     transform: translateZ(0);
+}
+
+.search-loader {
+    margin: 3em auto;
 }

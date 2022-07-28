@@ -11,7 +11,7 @@ export const allFruitsMarkup = [];
 const stopChecking = () => clearInterval(checkIfFruitsCanBeRendered);
 
 const renderControl = () => {
-    const spinner = document.querySelector(".loader");
+    const spinner = lists.allFruits.querySelector(".loader");
 
     if (isDataAssigned()) {
         stopChecking();
