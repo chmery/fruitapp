@@ -22,9 +22,44 @@ calculateBtn.addEventListener("click", () => {
     const allFats = [];
     const allCarbs = [];
 
+    const allWeights = [];
+
+    const checkIfWeightsCorrect = () => {
+        const areWeightsCorrect = allWeights.every((weight) => weight[1] > 0 && weight[1] <= 5000);
+
+        if (!areWeightsCorrect) {
+            const incorrectWeights = allWeights.filter(
+                (weight) => weight[1] <= 0 || weight[1] > 5000
+            );
+
+            incorrectWeights.forEach((weight) => {
+                const fruitId = weight[0];
+                const calculatorItem = document.querySelector(
+                    `[data-calculator-fruit-id="${fruitId}"]`
+                );
+
+                calculatorItem.style.border = "3px solid var(--dark-pink)";
+            });
+
+            alert("You can specify a weight from 1 to 5000 grams only.");
+            return false;
+        }
+
+        if (areWeightsCorrect) return true;
+    };
+
+    const setDefaultItemBorder = (fruitId) => {
+        const calculatorItem = document.querySelector(`[data-calculator-fruit-id="${fruitId}"]`);
+        calculatorItem.style.border = "";
+    };
+
     addedToCalculator.forEach((fruitId) => {
         const weightInput = document.querySelector(`input[data-fruit-id="${fruitId}"]`);
         const weight = weightInput.value;
+
+        allWeights.push([fruitId, weight]);
+
+        setDefaultItemBorder(fruitId);
 
         const calcValue = (nutrient) => {
             const macronutrient = fruits[fruitId].nutritions[nutrient];
@@ -37,6 +72,8 @@ calculateBtn.addEventListener("click", () => {
         allFats.push(calcValue("fat"));
         allCarbs.push(calcValue("carbohydrates"));
     });
+
+    if (!checkIfWeightsCorrect()) return;
 
     const calcTotalValue = (array) => Number(array.reduce((sum, item) => sum + item, 0)).toFixed(1);
 
