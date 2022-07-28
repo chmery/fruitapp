@@ -81,16 +81,18 @@ window.addEventListener("click", (e) => {
     const dropdownList = document.querySelector(".dropdown");
     if (!dropdownList) return;
 
+    const clickedEl = e.target;
+
     const parentEl = dropdownList.closest("header");
     const dropdownItems = Array.from(document.querySelectorAll("[class*='dropdown']"));
 
-    const isDropdownItemTarget = () => dropdownItems.some((item) => item === e.target);
+    const isDropdownItemTarget = () => dropdownItems.some((item) => item === clickedEl);
 
     const isSortBtnTarget = () =>
-        Array.from(sortBtns).some((btn) => btn === e.target.closest("p[class$='sort']"));
+        Array.from(sortBtns).some((btn) => btn === clickedEl.closest("p[class$='sort']"));
 
     if (isDropdownItemTarget) {
-        sortFruits(e.target);
+        sortFruits(clickedEl);
     }
 
     if ((!isDropdownItemTarget() && !isSortBtnTarget()) || isDropdownItemTarget()) {

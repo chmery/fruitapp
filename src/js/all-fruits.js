@@ -8,24 +8,19 @@ const showAllBtn = document.querySelector(".search__show-all");
 
 export const allFruitsMarkup = [];
 
-const stopChecking = () => clearInterval(checkIfFruitsCanBeRendered);
-
-const renderControl = () => {
+const renderControl = setInterval(() => {
     const spinner = lists.allFruits.querySelector(".loader");
 
     if (isDataAssigned()) {
-        stopChecking();
+        clearInterval(renderControl);
         generateMarkup();
         renderAllFruits();
 
-        if (!spinner) return;
-        lists.allFruits.removeChild(spinner);
+        if (spinner) lists.allFruits.removeChild(spinner);
     }
 
     if (!isDataAssigned() && !spinner) renderSpinner(lists.allFruits);
-};
-
-const checkIfFruitsCanBeRendered = setInterval(renderControl, 500);
+}, 500);
 
 const renderAllFruits = () => {
     allFruitsMarkup.forEach((fruit) => {

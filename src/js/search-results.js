@@ -8,7 +8,7 @@ const searchResults = document.querySelector(".search__results");
 const searchInput = document.querySelector(".search__input");
 let numResults;
 
-const controlSpinner = () => {
+const setLoadingContent = () => {
     const inputValue = searchInput.value;
     const spinner = lists.searchResults.querySelector(".loader");
 
@@ -90,7 +90,7 @@ searchInput.addEventListener("input", () => {
     const inputValue = searchInput.value.toLowerCase().trim();
 
     if (!isDataAssigned()) {
-        controlSpinner();
+        setLoadingContent();
         return;
     }
 
