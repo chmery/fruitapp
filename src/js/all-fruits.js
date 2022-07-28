@@ -1,34 +1,31 @@
 import { fruits, isDataAssigned } from "./fruits-data";
 import * as lists from "./lists";
 import { addedToFavourites } from "./add-to-favourites";
-import { setIconColorOnRender } from "./helpers";
+import { setIconColorOnRender, renderSpinner } from "./helpers";
 import { addedToCalculator } from "./add-to-calculator";
 
 const showAllBtn = document.querySelector(".search__show-all");
 
 export const allFruitsMarkup = [];
 
-const stopChecking = () => clearInterval(renderSpinnerIfDataNotAssigned);
+const stopChecking = () => clearInterval(checkIfFruitsCanBeRendered);
 
-const renderSpinner = () => {
+const renderControl = () => {
+    const spinner = document.querySelector(".loader");
+
     if (isDataAssigned()) {
         stopChecking();
         generateMarkup();
         renderAllFruits();
-        const spinner = document.querySelector(".loader");
+
         if (!spinner) return;
         lists.allFruits.removeChild(spinner);
     }
 
-    if (!isDataAssigned()) {
-        const isSpinnerRendered = document.querySelector(".loader");
-        if (isSpinnerRendered) return;
-        const markup = `<span class="loader"></span>`;
-        lists.allFruits.insertAdjacentHTML("afterbegin", markup);
-    }
+    if (!isDataAssigned() && !spinner) renderSpinner(lists.allFruits);
 };
 
-const renderSpinnerIfDataNotAssigned = setInterval(renderSpinner, 500);
+const checkIfFruitsCanBeRendered = setInterval(renderControl, 500);
 
 const renderAllFruits = () => {
     allFruitsMarkup.forEach((fruit) => {

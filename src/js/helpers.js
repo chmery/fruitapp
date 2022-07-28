@@ -14,3 +14,8 @@ export const setIconColorOnRender = (array, id) => {
     const isItemInArray = array.includes(id.toString());
     return isItemInArray ? `style="color: #ec7676"` : ``;
 };
+
+export const renderSpinner = (list) => {
+    const markup = `<span class="loader"></span>`;
+    list.insertAdjacentHTML("afterbegin", markup);
+};
