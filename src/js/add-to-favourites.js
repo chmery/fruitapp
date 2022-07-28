@@ -6,6 +6,7 @@ import {
     setIconColor,
     setIconColorOnRender,
     saveFavouritesToLocalStorage,
+    renderSpinner,
 } from "./helpers";
 import {
     addedToCalculator,
@@ -55,8 +56,26 @@ const updatePlusIconsColor = () => {
     });
 };
 
+const removeSpinnerAndRenderFavourites = setInterval(() => {
+    const spinner = lists.favourites.querySelector(".loader");
+
+    if (!isDataAssigned() && addedToFavourites.length > 1 && !spinner) {
+        renderSpinner(lists.favourites);
+        return;
+    }
+
+    if (isDataAssigned() && addedToFavourites.length > 1) {
+        clearInterval(removeSpinnerAndRenderFavourites);
+        renderFavouriteItems();
+
+        if (spinner) lists.favourites.removeChild(spinner);
+    }
+}, 500);
+
 export const renderFavouriteItems = () => {
-    if (addedToFavourites.length === 0 || !isDataAssigned()) {
+    if (!isDataAssigned()) return;
+
+    if (addedToFavourites.length === 0) {
         renderEmptyMessage();
         return;
     }
