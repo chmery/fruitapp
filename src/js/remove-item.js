@@ -1,5 +1,5 @@
 import * as lists from "./lists";
-import { removeIdFromAdded, removeItemMarkup } from "./helpers";
+import { removeIdFromAdded, removeItemMarkup, saveFavouritesToLocalStorage } from "./helpers";
 import {
     addedToCalculator,
     calculatorItemsMarkup,
@@ -22,6 +22,7 @@ const removeFavouriteItem = (itemToRemove) => {
     removeIdFromAdded(addedToFavourites, fruitId);
     removeItemMarkup(favouriteItemsMarkup, fruitId);
     updateCalculatorHeartIcons();
+    saveFavouritesToLocalStorage();
 };
 
 const removeCalculatorItem = (itemToRemove) => {

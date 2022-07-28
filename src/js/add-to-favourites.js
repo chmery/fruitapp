@@ -1,6 +1,12 @@
-import { fruits } from "./fruits-data";
+import { fruits, isDataAssigned } from "./fruits-data";
 import * as lists from "./lists";
-import { removeIdFromAdded, removeItemMarkup, setIconColor, setIconColorOnRender } from "./helpers";
+import {
+    removeIdFromAdded,
+    removeItemMarkup,
+    setIconColor,
+    setIconColorOnRender,
+    saveFavouritesToLocalStorage,
+} from "./helpers";
 import {
     addedToCalculator,
     renderCalculatorItems as updateCalculatorHeartIcons,
@@ -14,8 +20,8 @@ const listsWithHeartIcon = [
     lists.calculatorItems,
 ];
 
-export const addedToFavourites = [];
-export const favouriteItemsMarkup = [];
+export const addedToFavourites = JSON.parse(localStorage.getItem("addedToFavourites")) || [];
+export const favouriteItemsMarkup = JSON.parse(localStorage.getItem("favouriteItemsMarkup")) || [];
 
 const generateMarkup = (fruitId) => {
     const markup = `
@@ -50,7 +56,7 @@ const updatePlusIconsColor = () => {
 };
 
 export const renderFavouriteItems = () => {
-    if (addedToFavourites.length === 0) {
+    if (addedToFavourites.length === 0 || !isDataAssigned()) {
         renderEmptyMessage();
         return;
     }
@@ -90,11 +96,14 @@ listsWithHeartIcon.forEach((list) => {
         const sortingData = fruits[fruitId].nutritions;
         const isInFavourites = addedToFavourites.includes(fruitId);
 
+        const markup = generateMarkup(fruitId);
+
         if (isInFavourites) {
             removeItemMarkup(favouriteItemsMarkup, fruitId);
             removeIdFromAdded(addedToFavourites, fruitId);
             setIconColor(heartIcon, false);
             updateCalculatorHeartIcons();
+            saveFavouritesToLocalStorage();
 
             if (favouritesAmount() === 0) {
                 renderEmptyMessage();
@@ -102,11 +111,10 @@ listsWithHeartIcon.forEach((list) => {
             return;
         }
 
-        const markup = generateMarkup(fruitId);
-
         favouriteItemsMarkup.push([fruitId, markup, sortingData]);
         addedToFavourites.push(fruitId);
 
+        saveFavouritesToLocalStorage();
         setIconColor(heartIcon, true);
         updateCalculatorHeartIcons();
     });
