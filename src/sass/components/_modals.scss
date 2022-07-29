@@ -4,13 +4,17 @@ dialog {
     @include mixins.white-container;
     border: none;
     max-width: 33rem;
-    min-width: 27rem;
+    min-width: 25rem;
     overflow: hidden;
-    position: relative;
 
     &::backdrop {
         background: #000;
         opacity: 0.4;
+    }
+
+    @include mixins.mobile-breakpoint {
+        max-width: none;
+        width: 80%;
     }
 }
 

@@ -37,6 +37,12 @@
     }
 }
 
+@mixin mobile-breakpoint {
+    @media screen and (max-width: 500px) {
+        @content;
+    }
+}
+
 @mixin spinner-animation {
     animation: mulShdSpin 1.3s infinite linear;
 
