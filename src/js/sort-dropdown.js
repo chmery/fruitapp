@@ -1,8 +1,9 @@
 import { getSortedFruits, renderSortedFruits } from "./sorting";
 import { allFruitsMarkup } from "./all-fruits";
-import { favouriteItemsMarkup, favouritesAmount } from "./add-to-favourites";
+import { favouriteItemsMarkup, favouritesAmount, updatePlusIconsColor } from "./add-to-favourites";
 import * as lists from "./lists";
 import { clearList } from "./helpers";
+import { generateMarkup as generateAllFruitsMarkup } from "./all-fruits";
 
 const sortBtns = document.querySelectorAll("p[class$='sort']");
 
@@ -53,12 +54,16 @@ const sortFruits = (clickedEl) => {
     const isFavouritesOpened = modal.className.includes("favourites");
 
     if (isAllFruitsOpened) {
+        generateAllFruitsMarkup();
+
         const sortedFruits = getSortedFruits(allFruitsMarkup, macronutrient, order);
         clearList(lists.allFruits);
         renderSortedFruits(lists.allFruits, sortedFruits);
     }
 
     if (isFavouritesOpened && favouritesAmount() > 1) {
+        updatePlusIconsColor();
+
         const sortedFruits = getSortedFruits(favouriteItemsMarkup, macronutrient, order);
         clearList(lists.favourites);
         renderSortedFruits(lists.favourites, sortedFruits);

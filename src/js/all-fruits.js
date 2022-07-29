@@ -31,7 +31,7 @@ const renderAllFruits = () => {
     });
 };
 
-const generateMarkup = () => {
+export const generateMarkup = () => {
     clearAllFruitsMarkup();
     fruits.forEach((fruit, i) => {
         const sortingData = fruit.nutritions;

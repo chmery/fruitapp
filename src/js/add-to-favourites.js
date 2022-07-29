@@ -47,7 +47,7 @@ const generateMarkup = (fruitId) => {
     return markup;
 };
 
-const updatePlusIconsColor = () => {
+export const updatePlusIconsColor = () => {
     favouriteItemsMarkup.forEach((item) => {
         const fruitId = item[0];
         const markup = generateMarkup(fruitId);
