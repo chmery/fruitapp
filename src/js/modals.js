@@ -17,13 +17,6 @@ closeAllFruitsModal.addEventListener("click", () => {
     clearList(lists.allFruits);
 });
 
-window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        allFruitsModal.close();
-        clearList(lists.allFruits);
-    }
-});
-
 openFavouritesModal.addEventListener("click", () => {
     favouritesModal.showModal();
     clearList(lists.favourites);
@@ -38,6 +31,27 @@ closeFavouritesModal.addEventListener("click", () => {
 window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         favouritesModal.close();
+        allFruitsModal.close();
         clearList(lists.favourites);
+        clearList(lists.allFruits);
     }
 });
+
+[allFruitsModal, favouritesModal].forEach((modal) =>
+    modal.addEventListener("click", (e) => {
+        const modalPos = modal.getBoundingClientRect();
+
+        const horizontalPos = e.clientX;
+        const verticalPos = e.clientY;
+
+        if (
+            modalPos.left > horizontalPos ||
+            modalPos.right < horizontalPos ||
+            modalPos.top > verticalPos ||
+            modalPos.bottom < verticalPos
+        ) {
+            modal.close();
+            modal === allFruitsModal ? clearList(lists.allFruits) : clearList(lists.favourites);
+        }
+    })
+);
