@@ -85,3 +85,7 @@ calculateBtn.addEventListener("click", () => {
 
     renderCalculationResults(totalCalories, totalProteins, totalFats, totalCarbs);
 });
+
+window.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") calculateBtn.click();
+});
