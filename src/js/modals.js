@@ -10,6 +10,9 @@ const favouritesModal = document.querySelector(".favourites");
 const openFavouritesModal = document.querySelector(".calculator__btns-favourites");
 const closeFavouritesModal = document.querySelector(".favourites__close");
 
+export const errorModal = document.querySelector(".error");
+const closeErrorModal = document.querySelector(".error__close");
+
 openAllFruitsModal.addEventListener("click", () => allFruitsModal.showModal());
 
 closeAllFruitsModal.addEventListener("click", () => {
@@ -28,16 +31,19 @@ closeFavouritesModal.addEventListener("click", () => {
     clearList(lists.favourites);
 });
 
+closeErrorModal.addEventListener("click", () => errorModal.close());
+
 window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         favouritesModal.close();
         allFruitsModal.close();
+        errorModal.close();
         clearList(lists.favourites);
         clearList(lists.allFruits);
     }
 });
 
-[allFruitsModal, favouritesModal].forEach((modal) =>
+[allFruitsModal, favouritesModal, errorModal].forEach((modal) =>
     modal.addEventListener("click", (e) => {
         const modalPos = modal.getBoundingClientRect();
 

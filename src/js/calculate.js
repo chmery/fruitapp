@@ -1,5 +1,6 @@
 import { fruits } from "./fruits-data";
 import { addedToCalculator } from "./add-to-calculator";
+import { errorModal } from "./modals";
 
 const calculateBtn = document.querySelector(".calculator__btns-calculate");
 
@@ -41,7 +42,7 @@ calculateBtn.addEventListener("click", () => {
                 calculatorItem.style.border = "3px solid var(--dark-pink)";
             });
 
-            alert("You can specify a weight from 1 to 5000 grams only.");
+            errorModal.showModal();
             return false;
         }
 
